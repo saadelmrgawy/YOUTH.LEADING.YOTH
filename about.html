@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معلومات عنا | YLY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="./assets/home/bilo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/home/bilo.png" type="image/x-icon">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    :root {
+      --primary-color: #2b68ff;
+      --primary-hover: #1c4de1;
+      --accent-color: #ffc107;
+      --golden-hover: #ffd700;
+      --text-color: #fff;
+      --bg-overlay: rgba(0, 0, 50, 0.4);
+      --form-bg: rgba(255, 255, 255, 0.1);
+      --input-bg: rgba(255,255,255,0.2);
+      --input-hover: rgba(255,255,255,0.3);
+      --border-radius: 14px;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --mobile-breakpoint: 768px;
+      --tablet-breakpoint: 992px;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: url('./assets/home/bg-space.jpg.png') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-color);
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+    
+    .overlay {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(0, 20, 100, 0.7) 0%, rgba(0, 40, 80, 0.8) 100%);
+    }
+    
+    /* شريط التنقل - تحسينات للريسبونسيف */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+      background: transparent;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+      position: relative;
+    }
+    
+    .logo-section img {
+      height: 40px;
+      width: auto;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link {
+      padding: 10px 15px;
+      margin: 0 3px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+      position: relative;
+      cursor: pointer;
+      z-index: 2;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    /* تعديلات لموضع الأزرار في الوضع العربي */
+    [lang="ar"] .user-actions {
+      margin-right: auto;
+      margin-left: 0;
+    }
+    
+    [lang="en"] .user-actions {
+      margin-left: auto;
+      margin-right: 0;
+    }
+    
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 2;
+      min-width: 120px;
+      justify-content: flex-start;
+    }
+    
+    /* تحسينات البحث الجديدة */
+    .search-container {
+      position: relative;
+    }
+
+    .search-icon {
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 8px 12px;
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .search-icon:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+
+    .search-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+
+    .search-icon:hover::before {
+      transform: translateX(100%);
+    }
+
+    .search-bar {
+      position: fixed;
+      top: 70px;
+      right: 5%;
+      width: 90%;
+      max-width: 500px;
+      background: rgba(0, 0, 0, 0.95);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      display: none;
+      z-index: 100;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transform-origin: top center;
+      backdrop-filter: blur(10px);
+    }
+
+    .search-bar.active {
+      display: block;
+      animation: slideDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: var(--border-radius);
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      transition: all 0.3s;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1em;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 10px rgba(43, 104, 255, 0.5);
+      border-color: var(--primary-color);
+    }
+
+    .search-bar input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .search-btn {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border-radius: var(--border-radius);
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      width: 100%;
+    }
+
+    .search-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    /* لغة ذهبية */
+    .language-toggle {
+      font-size: clamp(1em, 1.1vw, 1.2em);
+      padding: clamp(6px, 0.8vw, 10px) clamp(10px, 1.2vw, 12px);
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      height: auto;
+    }
+    
+    .language-toggle:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    .language-toggle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .language-toggle:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* محتوى صفحة معلومات عنا */
+    .about-page {
+      padding: 80px 5% 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .about-header {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    
+    .about-title {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .about-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+    
+    .about-subtitle {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* قسم الفيديو التعريفي */
+    .video-section {
+      margin: 60px 0;
+      text-align: center;
+    }
+    
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+    
+    .video-container iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+    }
+    
+    .video-caption {
+      margin-top: 20px;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+    
+    /* قسم معلومات المشروع */
+    .project-info {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 40px;
+      margin: 50px 0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .project-info h3 {
+      color: var(--accent-color);
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    
+    .project-info p {
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+    
+    /* قسم اللجان المعدل */
+    .committees-section {
+      margin: 60px 0;
+    }
+    
+    .committees-title {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin-bottom: 40px;
+    }
+    
+    .committees-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      margin-bottom: 25px;
+    }
+    
+    .committees-grid-bottom {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      width: 75%;
+      margin: 0 auto;
+    }
+    
+    .committee-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 25px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .committee-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .committee-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    
+    .committee-card:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* تأثير التوهج عند الهوفر */
+    .committee-card:hover .committee-icon {
+      color: var(--golden-hover);
+      text-shadow: 0 0 15px var(--golden-hover);
+    }
+    
+    .committee-icon {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+      transition: all 0.3s;
+    }
+    
+    .committee-name {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .committee-name::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background: var(--primary-color);
+      transition: all 0.3s;
+    }
+    
+    .committee-card:hover .committee-name::after {
+      width: 80px;
+      background: var(--golden-hover);
+    }
+    
+    .committee-desc {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      line-height: 1.6;
+      transition: all 0.3s;
+    }
+    
+    .committee-card:hover .committee-desc {
+      opacity: 1;
+    }
+    
+    /* قسم الرؤية والرسالة */
+    .vision-mission {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 60px 0;
+    }
+    
+    @media (max-width: 768px) {
+      .vision-mission {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .vision-box, .mission-box {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .vision-box::before, .mission-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .vision-box:hover::before, .mission-box:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .vision-box h3, .mission-box h3 {
+      color: var(--accent-color);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .vision-box p, .mission-box p {
+      line-height: 1.8;
+    }
+    
+    /* قسم الأرقام والإحصائيات المعدل */
+    .stats-section {
+      margin: 60px 0;
+      text-align: center;
+    }
+    
+    .stats-title {
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin-bottom: 40px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    
+    .stat-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 25px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background: linear-gradient(45deg, rgba(43, 104, 255, 0.2), rgba(255, 193, 7, 0.2));
+      box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+    }
+    
+    .stat-card:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin: 10px 0;
+      transition: all 0.3s;
+    }
+    
+    .stat-card:hover .stat-number {
+      color: var(--golden-hover);
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .stat-label {
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+    
+    .stat-card:hover .stat-label {
+      color: white;
+      transform: scale(1.05);
+    }
+    
+    /* قسم انضم إلينا */
+    .join-section {
+      text-align: center;
+      margin: 80px 0 40px;
+    }
+    
+    .join-title {
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin-bottom: 30px;
+    }
+    
+    .join-btn {
+      padding: 15px 40px;
+      border-radius: var(--border-radius);
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: inline-block;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .join-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(43, 104, 255, 0.4);
+    }
+    
+    .join-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .join-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* تأثيرات الجزيئات */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+    }
+    
+    @keyframes floatParticle {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    /* قائمة الهاتف المنسدلة */
+    .hamburger-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1001;
+      margin-left: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+    }
+    
+    .hamburger-menu:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+    }
+    
+    .hamburger-line {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+    
+    /* قائمة الموبايل المنسدلة من المنتصف */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 20, 100, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu .nav-link {
+      width: 80%;
+      max-width: 300px;
+      margin: 10px 0;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    
+    /* شخصية بيلو التفاعلية - التعديلات الجديدة */
+    .bilo-character {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: biloFloat 3s ease-in-out infinite;
+    }
+
+    .bilo-character img {
+      width: 120px;
+      cursor: pointer;
+      transition: all 0.3s;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+    }
+
+    .bilo-character:hover img {
+      transform: scale(1.1);
+      animation: biloFloatHover 2s ease-in-out infinite;
+    }
+
+    .bilo-tooltip {
+      position: absolute;
+      bottom: 100%;
+      right: 0;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 15px;
+      border-radius: 15px;
+      width: 250px;
+      max-width: 90vw;
+      text-align: center;
+      font-size: 0.85em;
+      line-height: 1.6;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.2);
+      z-index: 1000;
+      white-space: normal;
+      word-wrap: break-word;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .bilo-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 20px;
+      border-width: 8px;
+      border-style: solid;
+      border-color: rgba(255, 255, 255, 0.15) transparent transparent transparent;
+    }
+
+    .bilo-character.active .bilo-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* تعديلات للغة الإنجليزية */
+    [lang="en"] .bilo-character {
+      right: auto;
+      left: 30px;
+    }
+
+    [lang="en"] .bilo-tooltip {
+      right: auto;
+      left: 0;
+      text-align: left;
+    }
+
+    [lang="en"] .bilo-tooltip::after {
+      right: auto;
+      left: 20px;
+    }
+
+    /* الفوتر - تعديلات لجعل كل العناصر تبدأ من اليمين */
+    .footer {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px 5% 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: right;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: right;
+    }
+    
+    .footer-col {
+      text-align: right;
+      direction: rtl;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo img {
+      height: 50px;
+    }
+    
+    .footer-about {
+      font-size: 0.9em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: right;
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .footer-social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      font-size: 1.2em;
+    }
+    
+    .footer-social-icon:hover {
+      background: linear-gradient(45deg, #ffc107, #ff9800);
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+      color: #000;
+    }
+    
+    .footer-social-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .footer-social-icon:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .footer-links h3 {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+      text-align: right;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+      text-align: right;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+      text-align: right;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+      text-align: right;
+    }
+    
+    .footer-links a:hover {
+      color: var(--golden-hover);
+      padding-right: 5px;
+    }
+    
+    /* قسم البحث في الفوتر - تحسينات جديدة */
+    .footer-search {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 25px;
+      width: 100%;
+    }
+    
+    .footer-search-input {
+      display: flex;
+      width: 100%;
+      max-width: 300px;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .footer-search input {
+      padding: 12px 15px;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      width: 100%;
+      transition: all 0.3s;
+      font-family: 'Cairo', sans-serif;
+    }
+    
+    .footer-search input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 10px rgba(43, 104, 255, 0.5);
+      border-color: var(--primary-color);
+    }
+    
+    .footer-search input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .footer-search-btn {
+      padding: 12px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      width: 45px;
+      height: 45px;
+    }
+    
+    .footer-search-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(43, 104, 255, 0.4);
+    }
+    
+    .footer-search-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .footer-search-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 30px 0;
+      grid-column: 1 / -1;
+    }
+    
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9em;
+      opacity: 0.7;
+      grid-column: 1 / -1;
+    }
+    
+    @keyframes biloFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes biloFloatHover {
+      0%, 100% {
+        transform: translateY(0) scale(1.1);
+      }
+      50% {
+        transform: translateY(-15px) scale(1.1);
+      }
+    }
+    
+    /* تحسينات للهواتف المحمولة */
+    @media (max-width: 992px) {
+      .committees-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .committees-grid-bottom {
+        width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-bar {
+        flex-wrap: wrap;
+        padding: 10px;
+        justify-content: space-between;
+      }
+      
+      .logo-section {
+        order: 1;
+        flex: 0 0 auto;
+      }
+      
+      .user-actions {
+        order: 2;
+        flex: 0 0 auto;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .hamburger-menu {
+        order: 3;
+        display: flex;
+        margin-left: 0;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu {
+        display: flex;
+      }
+      
+      .search-container {
+        margin-left: 0;
+      }
+      
+      .search-bar {
+        right: 5%;
+        left: auto;
+        width: 90%;
+      }
+      
+      .language-toggle span {
+        display: none;
+      }
+      
+      .about-title {
+        font-size: 2rem;
+      }
+      
+      .about-subtitle {
+        font-size: 1rem;
+      }
+      
+      .video-container iframe {
+        height: 300px;
+      }
+      
+      .project-info {
+        padding: 25px;
+      }
+      
+      .committees-grid,
+      .committees-grid-bottom {
+        grid-template-columns: 1fr;
+      }
+      
+      .vision-mission {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-col {
+        text-align: center;
+      }
+      
+      .footer-links ul {
+        text-align: center;
+      }
+      
+      .footer-links a:hover {
+        padding-right: 0;
+        padding-left: 5px;
+      }
+      
+      /* تعديلات بيلو للهاتف */
+      .bilo-character {
+        width: 100px;
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .bilo-tooltip {
+        width: 200px;
+        font-size: 0.8em;
+        padding: 10px;
+        right: 0;
+      }
+      
+      [lang="en"] .bilo-character {
+        left: 20px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .about-page {
+        padding: 60px 3% 40px;
+      }
+      
+      .about-title {
+        font-size: 1.8rem;
+      }
+      
+      .video-container iframe {
+        height: 250px;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .bilo-character {
+        width: 80px;
+        bottom: 15px;
+        right: 15px;
+      }
+      
+      .bilo-tooltip {
+        width: 180px;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .about-title {
+        font-size: 1.5rem;
+      }
+      
+      .video-container iframe {
+        height: 200px;
+      }
+    }
+    
+    /* تعديلات الفوتر للغة الإنجليزية */
+    [lang="en"] .footer {
+      text-align: left;
+      direction: ltr;
+    }
+    
+    [lang="en"] .footer-content {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-col {
+      text-align: left;
+      direction: ltr;
+    }
+    
+    [lang="en"] .footer-logo {
+      justify-content: flex-start;
+    }
+    
+    [lang="en"] .footer-about {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-social {
+      justify-content: flex-start;
+    }
+    
+    [lang="en"] .footer-links h3 {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links ul {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links li {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links a:hover {
+      padding-right: 0;
+      padding-left: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="overlay"></div>
+<div class="particles" id="particles"></div>
+
+<!-- شخصية بيلو التفاعلية - النسخة المحسنة -->
+<div class="bilo-character" id="bilo-character">
+  <div class="bilo-tooltip" id="bilo-tooltip">
+    مرحباً! أنا بيلو، صديق رحلتك في مشروع YLY. أنا هنا لمساعدتك في استكشاف الموقع!
+  </div>
+  <img src="./assets/home/bilo-taier.png" alt="بيلو المساعد الشخصي" id="bilo-image">
+</div>
+
+<!-- شريط التنقل الموحد -->
+<div class="nav-bar">
+  <div class="logo-section">
+    <img src="./assets/home/minestry-sports.png" alt="وزارة الشباب والرياضة">
+    <img src="./assets/home/logo-yly-minsttry.png" alt="YLY">
+  </div>
+  
+  <div class="nav-links" id="nav-links">
+    <a href="index.html" class="nav-link" data-ar="الصفحة الرئيسية" data-en="Home"><i data-feather="home"></i> الصفحة الرئيسية</a>
+    <a href="news.html" class="nav-link" data-ar="الأخبار" data-en="News"><i data-feather="file-text"></i> الأخبار</a>
+    <a href="events.html" class="nav-link" data-ar="الفعاليات" data-en="Events"><i data-feather="calendar"></i> الفعاليات</a>
+    <a href="sponsors.html" class="nav-link" data-ar="الداعمون" data-en="Sponsors"><i data-feather="users"></i> الداعمون</a>
+    <a href="about.html" class="nav-link active" data-ar="معلومات عنا" data-en="About"><i data-feather="info"></i> معلومات عنا</a>
+    <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"><i data-feather="mail"></i> اتصل بنا</a>
+  </div>
+  
+  <div class="user-actions">
+    <div class="language-toggle" onclick="toggleLanguage()">
+      <i data-feather="globe"></i>
+      <span>العربية / English</span>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-icon" id="search-icon">
+        <i data-feather="search"></i>
+      </div>
+      <div class="search-bar" id="search-bar">
+        <input type="text" placeholder="ابحث عن أحداث، أخبار، متطوعين..." data-ar-placeholder="ابحث عن أحداث، أخبار، متطوعين..." data-en-placeholder="Search for events, news, volunteers...">
+        <button class="search-btn" id="search-btn" data-ar="بحث" data-en="Search">بحث</button>
+        <div class="search-results" style="display: none;">
+          <!-- سيتم إضافة نتائج البحث هنا ديناميكيًا -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="hamburger-menu" id="hamburger-menu">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- قائمة الموبايل المنسدلة -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="nav-link" data-ar="الصفحة الرئيسية" data-en="Home"><i data-feather="home"></i> الصفحة الرئيسية</a>
+  <a href="news.html" class="nav-link" data-ar="الأخبار" data-en="News"><i data-feather="file-text"></i> الأخبار</a>
+  <a href="events.html" class="nav-link" data-ar="الفعاليات" data-en="Events"><i data-feather="calendar"></i> الفعاليات</a>
+  <a href="sponsors.html" class="nav-link" data-ar="الداعمون" data-en="Sponsors"><i data-feather="users"></i> الداعمون</a>
+  <a href="about.html" class="nav-link active" data-ar="معلومات عنا" data-en="About"><i data-feather="info"></i> معلومات عنا</a>
+  <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"><i data-feather="mail"></i> اتصل بنا</a>
+</div>
+
+<!-- محتوى صفحة معلومات عنا -->
+<div id="About" class="about-page">
+  <div class="about-header">
+    <h1 class="about-title" data-ar="معلومات عن مشروع YLY" data-en="About YLY Project">معلومات عن مشروع YLY</h1>
+    <p class="about-subtitle" data-ar="منصة التطوع الرائدة التي تهدف إلى تمكين الشباب وتنمية مهاراتهم من خلال المشاركة في الفعاليات والأنشطة المجتمعية" data-en="The leading volunteering platform that aims to empower youth and develop their skills through participation in community events and activities">منصة التطوع الرائدة التي تهدف إلى تمكين الشباب وتنمية مهاراتهم من خلال المشاركة في الفعاليات والأنشطة المجتمعية</p>
+  </div>
+  
+  <!-- قسم الفيديو التعريفي -->
+  <div class="video-section">
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/paunQXF47_4" title="فيديو تعريفي عن مشروع YLY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption" data-ar="فيديو تعريفي عن مشروع متطوعي وزارة الشباب والرياضة YLY" data-en="Introductory video about YLY project">فيديو تعريفي عن مشروع متطوعي وزارة الشباب والرياضة YLY</p>
+  </div>
+  
+  <!-- قسم معلومات المشروع -->
+  <div id="Who" class="project-info">
+    <h3 data-ar="من نحن؟" data-en="Who We Are?">من نحن؟</h3>
+    <p data-ar="نحن متطوعو وزارة الشباب والرياضة YLY، مشروع أطلقه وزير الشباب والرياضة الدكتور أشرف صبحي تحت مسمى (الشباب يدير الشباب) منذ توليه منصب وزير الشباب والرياضة عام 2018." data-en="We are the volunteers of the Ministry of Youth and Sports, YLY, a project launched by the Minister of Youth and Sports, Dr. Ashraf Sobhy, under the name (Youth Managing Youth) since he assumed the position of Minister of Youth and Sports in 2018.">
+      نحن متطوعو وزارة الشباب والرياضة YLY، مشروع أطلقه وزير الشباب والرياضة الدكتور أشرف صبحي تحت مسمى (الشباب يدير الشباب) منذ توليه منصب وزير الشباب والرياضة عام 2018.
+    </p>
+    <p data-ar="ينتشر المشروع على مستوى محافظات الجمهورية ويضم عدد كبير من الشباب في 7 لجان وهي الموارد البشرية - التواصل الاجتماعي - العلاقات العامة - البحث والتطوير - الإعلام - التدريب - غرفة العمليات، بحيث يقوم كل واحد منهم بتطوير نفسه وزيادة قدراته." data-en="The project spreads across the governorates of the Republic and includes a large number of youth in 7 committees: Human Resources - Social Media - Public Relations - Research and Development - Media - Training - Operations Room, where each of them works to develop themselves and increase their capabilities.">
+      ينتشر المشروع على مستوى محافظات الجمهورية ويضم عدد كبير من الشباب في 7 لجان وهي الموارد البشرية - التواصل الاجتماعي - العلاقات العامة - البحث والتطوير - الإعلام - التدريب - غرفة العمليات، بحيث يقوم كل واحد منهم بتطوير نفسه وزيادة قدراته.
+    </p>
+    <p data-ar="وللمشروع رؤية واضحة وهي توسيع قاعدة مشاركة الشباب ومن أهدافه النهوض بأنشطة الوزارة وتنظيم أنشطة الوزارة وبناء قيادات شابة وتأهيل الشباب لمواكبة سوق العمل مع نشر ثقافة الرياضة كأسلوب حياة." data-en="The project has a clear vision, which is to expand the base of youth participation, and among its goals is to advance the activities of the ministry, organize the activities of the ministry, build young leaders, and qualify youth to keep pace with the labor market while spreading the culture of sports as a lifestyle.">
+      وللمشروع رؤية واضحة وهي توسيع قاعدة مشاركة الشباب ومن أهدافه النهوض بأنشطة الوزارة وتنظيم أنشطة الوزارة وبناء قيادات شابة وتأهيل الشباب لمواكبة سوق العمل مع نشر ثقافة الرياضة كأسلوب حياة.
+    </p>
+  </div>
+  
+  <!-- قسم اللجان المعدل -->
+  <div id="Committees" class="committees-section">
+    <h2 class="committees-title" data-ar="لجان المشروع" data-en="Project Committees">لجان المشروع</h2>
+    
+    <div class="committees-grid">
+      <div class="committee-card">
+        <div class="committee-icon">
+          <i class="fas fa-users-cog"></i>
+        </div>
+        <h3 class="committee-name" data-ar="الموارد البشرية" data-en="Human Resources">الموارد البشرية</h3>
+        <p class="committee-desc" data-ar="تهتم بإدارة المتطوعين وتطوير مهاراتهم وتوزيع المهام عليهم حسب قدراتهم." data-en="Concerned with managing volunteers, developing their skills, and distributing tasks to them according to their abilities.">
+          تهتم بإدارة المتطوعين وتطوير مهاراتهم وتوزيع المهام عليهم حسب قدراتهم.
+        </p>
+      </div>
+      
+      <div class="committee-card">
+        <div class="committee-icon">
+          <i class="fas fa-hashtag"></i>
+        </div>
+        <h3 class="committee-name" data-ar="التواصل الاجتماعي" data-en="Social Media">التواصل الاجتماعي</h3>
+        <p class="committee-desc" data-ar="مسؤولة عن إدارة المنصات الرقمية ونشر أخبار المشروع والفعاليات." data-en="Responsible for managing digital platforms and publishing project and event news.">
+          مسؤولة عن إدارة المنصات الرقمية ونشر أخبار المشروع والفعاليات.
+        </p>
+      </div>
+      
+      <div class="committee-card">
+        <div class="committee-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <h3 class="committee-name" data-ar="العلاقات العامة" data-en="Public Relations">العلاقات العامة</h3>
+        <p class="committee-desc" data-ar="تسعى لبناء علاقات مع الجهات الداعمة والمشاركة في تنظيم الفعاليات." data-en="Seeks to build relationships with supporting entities and participate in organizing events.">
+          تسعى لبناء علاقات مع الجهات الداعمة والمشاركة في تنظيم الفعاليات.
+        </p>
+      </div>
+      
+      <div class="committee-card">
+        <div class="committee-icon">
+          <i class="fas fa-flask"></i>
+        </div>
+        <h3 class="committee-name" data-ar="البحث والتطوير" data-en="Research & Development">البحث والتطوير</h3>
+        <p class="committee-desc" data-ar="تعمل على تطوير المشروع وتحسين أدائه من خلال الدراسات والأبحاث." data-en="Works to develop the project and improve its performance through studies and research.">
+          تعمل على تطوير المشروع وتحسين أدائه من خلال الدراسات والأبحاث.
+        </p>
+      </div>
+    </div>
+    
+    <div class="committees-grid-bottom">
+      <div class="committee-card">
+        <div class="committee-icon">
+          <i class="fas fa-tv"></i>
+        </div>
+        <h3 class="committee-name" data-ar="الإعلام" data-en="Media">الإعلام</h3>
+        <p class="committee-desc" data-ar="مسؤولة عن التغطية الإعلامية للفعاليات وإنتاج المحتوى المرئي." data-en="Responsible for media coverage of events and production of visual content.">
+          مسؤولة عن التغطية الإعلامية للفعاليات وإنتاج المحتوى المرئي.
+        </p>
+      </div>
+      
+      <div class="committee-card">
+        <div class="committee-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3 class="committee-name" data-ar="التدريب" data-en="Training">التدريب</h3>
+        <p class="committee-desc" data-ar="تهتم بتنمية مهارات المتطوعين من خلال ورش العمل والبرامج التدريبية." data-en="Concerned with developing volunteers' skills through workshops and training programs.">
+          تهتم بتنمية مهارات المتطوعين من خلال ورش العمل والبرامج التدريبية.
+        </p>
+      </div>
+      
+      <div class="committee-card">
+        <div class="committee-icon">
+          <i class="fas fa-chess"></i>
+        </div>
+        <h3 class="committee-name" data-ar="غرفة العمليات" data-en="Operations Room">غرفة العمليات</h3>
+        <p class="committee-desc" data-ar="مسؤولة عن التنسيق بين اللجان ومتابعة سير العمل في الفعاليات." data-en="Responsible for coordinating between committees and following up on the progress of work in events.">
+          مسؤولة عن التنسيق بين اللجان ومتابعة سير العمل في الفعاليات.
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- قسم الرؤية والرسالة -->
+  <div id="Vision" class="vision-mission">
+    <div class="vision-box">
+      <h3 data-ar="رؤيتنا" data-en="Our Vision">رؤيتنا</h3>
+      <p data-ar="توسيع قاعدة مشاركة الشباب في الأنشطة المجتمعية والرياضية، وبناء جيل واعٍ قادر على تحمل المسؤولية والمشاركة الفعالة في تنمية المجتمع." data-en="Expanding the base of youth participation in community and sports activities, and building an aware generation capable of bearing responsibility and active participation in community development.">
+        توسيع قاعدة مشاركة الشباب في الأنشطة المجتمعية والرياضية، وبناء جيل واعٍ قادر على تحمل المسؤولية والمشاركة الفعالة في تنمية المجتمع.
+      </p>
+    </div>
+    
+    <div class="mission-box">
+      <h3 data-ar="رسالتنا" data-en="Our Mission">رسالتنا</h3>
+      <p data-ar="تمكين الشباب وتأهيلهم لسوق العمل من خلال برامج تطوعية مبتكرة تواكب احتياجات العصر، وتساهم في بناء شخصية متكاملة للشباب المصري." data-en="Empowering youth and qualifying them for the labor market through innovative volunteer programs that keep pace with the needs of the times, and contribute to building an integrated personality for Egyptian youth.">
+        تمكين الشباب وتأهيلهم لسوق العمل من خلال برامج تطوعية مبتكرة تواكب احتياجات العصر، وتساهم في بناء شخصية متكاملة للشباب المصري.
+      </p>
+    </div>
+  </div>
+  
+  <!-- قسم الأرقام والإحصائيات المعدل -->
+  <div id="stats" class="stats-section">
+    <h2 class="stats-title" data-ar="إحصائيات المشروع" data-en="Project Statistics">إحصائيات المشروع</h2>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="volunteers-stat">10,000+</div>
+        <div class="stat-label" data-ar="متطوع نشط" data-en="Active Volunteers">متطوع نشط</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-number" id="events-stat">150+</div>
+        <div class="stat-label" data-ar="فعالية منظمة" data-en="Organized Events">فعالية منظمة</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-number" id="governorates-stat">27</div>
+        <div class="stat-label" data-ar="محافظة مصرية" data-en="Egyptian Governorates">محافظة مصرية</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-number" id="committees-stat">7</div>
+        <div class="stat-label" data-ar="لجان متخصصة" data-en="Specialized Committees">لجان متخصصة</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- قسم انضم إلينا -->
+  <div class="join-section">
+    <h2 class="join-title" data-ar="انضم إلى عائلة YLY" data-en="Join YLY Family">انضم إلى عائلة YLY</h2>
+    <a href="register.html" class="join-btn" data-ar="سجل الآن" data-en="Register Now">سجل الآن</a>
+  </div>
+</div>
+
+<!-- الفوتر -->
+<div class="footer">
+  <div class="footer-content">
+    <!-- القسم الأول: الشعار والوصف والروابط الاجتماعية -->
+    <div class="footer-col">
+      <div class="footer-logo">
+        <img src="./assets/home/minestry-sports.png" alt="وزارة الشباب والرياضة" style="width: 50px;">
+        <img src="./assets/home/logo-yly-minsttry.png" alt="YLY" style="width: 50px;">
+      </div>
+      
+      <p class="footer-about" data-ar="مشروع YLY هو مبادرة شبابية تحت رعاية وزارة الشباب والرياضة تهدف إلى تمكين الشباب وتنمية مهاراتهم من خلال المشاركة في تنظيم الفعاليات والأنشطة المجتمعية." data-en="The YLY project is a youth initiative under the auspices of the Ministry of Youth and Sports that aims to empower youth and develop their skills through participation in organizing community events and activities.">
+        مشروع YLY هو مبادرة شبابية تحت رعاية وزارة الشباب والرياضة تهدف إلى تمكين الشباب وتنمية مهاراتهم من خلال المشاركة في تنظيم الفعاليات والأنشطة المجتمعية.
+      </p>
+      
+      <div class="footer-social">
+        <a href="#" class="footer-social-icon"><i data-feather="facebook"></i></a>
+        <a href="#" class="footer-social-icon"><i data-feather="instagram"></i></a>
+        <a href="#" class="footer-social-icon"><i class="bi bi-tiktok"></i></a>
+        <a href="#" class="footer-social-icon"><i data-feather="linkedin"></i></a>
+      </div>
+    </div>
+    
+    <!-- القسم الثاني: روابط سريعة -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+      <ul class="footer-links">
+        <li><a href="index.html" data-ar=" الرئيسية" data-en="Home">الصفحة الرئيسية</a></li>
+        <li><a href="news.html" data-ar="الأخبار" data-en="News">الأخبار</a></li>
+        <li><a href="events.html" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+        <li><a href="sponsors.html" data-ar="الداعمون" data-en="Sponsors">الداعمون</a></li>
+        <li><a href="about.html" data-ar="معلومات عنا" data-en="About">معلومات عنا</a></li>
+        <li><a href="contact.html" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
+      </ul>
+    </div>
+    
+    <!-- القسم الثالث: روابط الصفحة الرئيسية -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="معلومات عنا" data-en="ABOUT US Page">صفحة معلوماتنا </h3>
+      <ul class="footer-links">
+        <li><a href="#About" data-ar="معلومات عن المشروع" data-en="about YLY">معلومات عن المشروع</a></li>
+        <li><a href="#Who" data-ar="من نحن؟" data-en="Who are we?">من نحن؟</a></li>
+        <li><a href="#Committees" data-ar="لجان المشروع" data-en="YLY committees"> لجان المشروع</a></li>
+        <li><a href="#Vision" data-ar="الرؤية والرسالة" data-en="Vision & Mission">الرئية والرسالة</a></li>
+        <li><a href="#stats" data-ar="احصائيات المشروع" data-en="YLY statistics">احصائيات المشروع</a></li>
+      </ul>
+    </div>
+    
+    <!-- القسم الرابع: البحث في الموقع -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="ابحث في الموقع" data-en="Search Site">ابحث في الموقع</h3>
+      <div class="footer-search">
+        <div class="footer-search-input">
+          <input type="text" placeholder="ابحث في الموقع..." data-ar-placeholder="ابحث في الموقع..." data-en-placeholder="Search the site...">
+          <button class="footer-search-btn">
+            <i data-feather="search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- الخط الفاصل -->
+    <div class="footer-divider"></div>
+    
+    <!-- حقوق النشر -->
+    <div class="footer-copyright">
+      <span data-ar="&copy; 2025 جميع الحقوق محفوظة لمشروع YLY - وزارة الشباب والرياضة" data-en="&copy; 2025 All Rights Reserved to YLY Project - Ministry of Youth and Sports">&copy; 2025 جميع الحقوق محفوظة لمشروع YLY - وزارة الشباب والرياضة</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // تهيئة الصفحة
+  document.addEventListener('DOMContentLoaded', function() {
+    // إنشاء الجزيئات المتحركة
+    createParticles();
+    
+    // تفعيل البحث
+    setupSearch();
+    
+    // التحكم في القائمة المنسدلة على الموبايل
+    setupMobileMenu();
+    
+    // تهيئة شخصية بيلو التفاعلية
+    setupBiloCharacter();
+    
+    // تحميل أيقونات Feather
+    feather.replace();
+    
+    // إعداد عداد الإحصائيات
+    setupStatsAnimation();
+  });
+
+  // تبديل اللغة مع ترجمة كاملة للمحتوى
+  function toggleLanguage() {
+    const currentLang = document.documentElement.lang;
+    const elementsToTranslate = document.querySelectorAll('[data-ar], [data-en]');
+    
+    if (currentLang === 'ar') {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+      document.querySelector('.language-toggle span').textContent = 'English / العربية';
+      document.title = 'About | YLY';
+      
+      // ترجمة جميع العناصر
+      elementsToTranslate.forEach(el => {
+        if (el.dataset.en) {
+          el.textContent = el.dataset.en;
+        }
+        if (el.dataset.enPlaceholder) {
+          el.placeholder = el.dataset.enPlaceholder;
+        }
+      });
+      
+      // تحديث النصوص الديناميكية
+      document.querySelector('.bilo-tooltip').textContent = 'Hello! I am Bilo, your companion on the YLY project journey. I am here to help you explore the site!';
+      
+      // تحديث اتجاه أيقونات Feather
+      feather.replace();
+    } else {
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      document.querySelector('.language-toggle span').textContent = 'العربية / English';
+      document.title = 'معلومات عنا | YLY';
+      
+      // إعادة النصوص إلى العربية
+      elementsToTranslate.forEach(el => {
+        if (el.dataset.ar) {
+          el.textContent = el.dataset.ar;
+        }
+        if (el.dataset.arPlaceholder) {
+          el.placeholder = el.dataset.arPlaceholder;
+        }
+      });
+      
+      // تحديث النصوص الديناميكية
+      document.querySelector('.bilo-tooltip').textContent = 'مرحباً! أنا بيلو، صديق رحلتك في مشروع YLY. أنا هنا لمساعدتك في استكشاف الموقع!';
+      
+      // تحديث اتجاه أيقونات Feather
+      feather.replace();
+    }
+  }
+
+  // إنشاء الجزيئات المتحركة
+  function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const count = Math.floor(window.innerWidth / 20);
+    
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      const size = Math.random() * 5 + 2;
+      const posX = Math.random() * window.innerWidth;
+      const duration = Math.random() * 15 + 10;
+      const delay = Math.random() * 10;
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${posX}px`;
+      particle.style.bottom = '0';
+      particle.style.animationDuration = `${duration}s`;
+      particle.style.animationDelay = `${delay}s`;
+      
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  // تفعيل البحث
+  function setupSearch() {
+    const searchIcon = document.getElementById('search-icon');
+    const searchBar = document.getElementById('search-bar');
+    const searchBtn = document.getElementById('search-btn');
+    
+    searchIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchBar.classList.toggle('active');
+      
+      if (searchBar.classList.contains('active')) {
+        searchBar.querySelector('input').focus();
+      }
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container') && !e.target.closest('.search-bar')) {
+        searchBar.classList.remove('active');
+      }
+    });
+    
+    searchBar.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+    
+    // تفعيل زر البحث
+    searchBtn.addEventListener('click', function() {
+      const searchTerm = document.querySelector('.search-bar input').value;
+      if (searchTerm.trim() !== '') {
+        alert('سيتم البحث عن: ' + searchTerm);
+        // هنا يمكنك إضافة منطق البحث الفعلي
+      }
+    });
+    
+    // تفعيل البحث عند الضغط على Enter
+    document.querySelector('.search-bar input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const searchTerm = this.value;
+        if (searchTerm.trim() !== '') {
+          alert('سيتم البحث عن: ' + searchTerm);
+          // هنا يمكنك إضافة منطق البحث الفعلي
+        }
+      }
+    });
+  }
+  
+  // إعداد القائمة المنسدلة للهاتف
+  function setupMobileMenu() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+    
+    document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-bar') && mobileMenu.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+  
+  // إعداد شخصية بيلو التفاعلية - النسخة المحسنة
+  function setupBiloCharacter() {
+    const biloCharacter = document.getElementById('bilo-character');
+    const biloTooltip = document.getElementById('bilo-tooltip');
+    const biloImage = document.getElementById('bilo-image');
+    
+    // رسالة ترحيبية عند تحميل الصفحة مع تأثيرات
+    setTimeout(() => {
+      biloTooltip.textContent = 'مرحباً بك في صفحة معلومات عنا! هنا يمكنك التعرف أكثر على مشروع YLY وأهدافه.';
+      biloCharacter.classList.add('active');
+      biloCharacter.classList.add('bilo-welcoming');
+      
+      setTimeout(() => {
+        biloCharacter.classList.remove('active');
+        biloCharacter.classList.remove('bilo-welcoming');
+      }, 10000);
+    }, 1500);
+    
+    // إظهار الرسالة عند النقر على بيلو
+    biloCharacter.addEventListener('click', function() {
+      biloCharacter.classList.add('active');
+      biloCharacter.classList.add('bilo-dancing');
+      
+      setTimeout(() => {
+        biloCharacter.classList.remove('active');
+        biloCharacter.classList.remove('bilo-dancing');
+      }, 10000);
+    });
+    
+    // تأثير اهتزاز عند المرور بالفأرة
+    biloCharacter.addEventListener('mouseenter', function() {
+      biloCharacter.classList.add('bilo-welcoming');
+    });
+    
+    biloCharacter.addEventListener('mouseleave', function() {
+      biloCharacter.classList.remove('bilo-welcoming');
+    });
+  }
+  
+  // إعداد تأثيرات الأرقام الإحصائية
+  function setupStatsAnimation() {
+    const statsSection = document.querySelector('.stats-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStats();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(statsSection);
+  }
+
+  // تأثير حركة الأرقام الإحصائية
+  function animateStats() {
+    const stats = [
+      { element: document.getElementById('volunteers-stat'), target: 10000, duration: 2000 },
+      { element: document.getElementById('events-stat'), target: 150, duration: 1500 },
+      { element: document.getElementById('governorates-stat'), target: 27, duration: 1000 },
+      { element: document.getElementById('committees-stat'), target: 7, duration: 800 }
+    ];
+    
+    stats.forEach(stat => {
+      const increment = stat.target / (stat.duration / 16);
+      let current = 0;
+      
+      const updateCounter = () => {
+        current += increment;
+        if (current < stat.target) {
+          stat.element.textContent = Math.floor(current).toLocaleString();
+          requestAnimationFrame(updateCounter);
+        } else {
+          stat.element.textContent = stat.target.toLocaleString();
+        }
+      };
+      
+      updateCounter();
+    });
+  }
+
+  // دالة للتمرير السلس للأقسام
+  function smoothScrollToSection(event) {
+    // منع السلوك الافتراضي للرابط
+    event.preventDefault();
+    
+    // الحصول على الـ ID من سمة href للرابط
+    const targetId = this.getAttribute('href').substring(1);
+    const targetSection = document.getElementById(targetId);
+    
+    if (targetSection) {
+      // حساب الموقع مع مراعاة ارتفاع شريط التنقل
+      const navBarHeight = document.querySelector('.nav-bar').offsetHeight;
+      const targetPosition = targetSection.offsetTop - navBarHeight;
+      
+      // التمرير السلس إلى القسم
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+      
+      // تحديث عنوان URL بدون إعادة تحميل الصفحة
+      history.pushState(null, null, `#${targetId}`);
+    }
+  }
+
+  // إعداد الروابط عند تحميل الصفحة
+  document.addEventListener('DOMContentLoaded', function() {
+    // جمع كل الروابط التي تشير إلى أقسام في الصفحة
+    const internalLinks = document.querySelectorAll('a[href^="#"]');
+    
+    // إضافة مستمع حدث لكل رابط
+    internalLinks.forEach(link => {
+      link.addEventListener('click', smoothScrollToSection);
+    });
+    
+    // إذا كان هناك هاش في URL، قم بالتمرير إلى القسم عند تحميل الصفحة
+    if (window.location.hash) {
+      setTimeout(() => {
+        const targetSection = document.getElementById(window.location.hash.substring(1));
+        if (targetSection) {
+          const navBarHeight = document.querySelector('.nav-bar').offsetHeight;
+          window.scrollTo({
+            top: targetSection.offsetTop - navBarHeight,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+  });
+</script>
+</body>
+</html>

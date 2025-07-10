@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الفعاليات | YLY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">  
+  <link rel="icon" href="./assets/home/bilo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/home/bilo.png" type="image/x-icon">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    :root {
+      --primary-color: #2b68ff;
+      --primary-hover: #1c4de1;
+      --accent-color: #ffc107;
+      --golden-hover: #ffd700;
+      --text-color: #fff;
+      --bg-overlay: rgba(0, 0, 50, 0.4);
+      --form-bg: rgba(255, 255, 255, 0.1);
+      --input-bg: rgba(255,255,255,0.2);
+      --input-hover: rgba(255,255,255,0.3);
+      --border-radius: 14px;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --mobile-breakpoint: 768px;
+      --tablet-breakpoint: 992px;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: url('./assets/home/bg-space.jpg.png') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-color);
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+    
+    .overlay {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(0, 20, 100, 0.7) 0%, rgba(0, 40, 80, 0.8) 100%);
+    }
+    
+    /* شريط التنقل */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+      background: transparent;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+      position: relative;
+    }
+    
+    .logo-section img {
+      height: 40px;
+      width: auto;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link {
+      padding: 10px 15px;
+      margin: 0 3px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+      position: relative;
+      cursor: pointer;
+      z-index: 2;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    /* تعديلات لموضع الأزرار في الوضع العربي */
+    [lang="ar"] .user-actions {
+      margin-right: auto;
+      margin-left: 0;
+    }
+    
+    [lang="en"] .user-actions {
+      margin-left: auto;
+      margin-right: 0;
+    }
+    
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 2;
+      min-width: 120px;
+      justify-content: flex-start;
+    }
+    
+    /* لغة ذهبية */
+    .language-toggle {
+      font-size: clamp(1em, 1.1vw, 1.2em);
+      padding: clamp(6px, 0.8vw, 10px) clamp(10px, 1.2vw, 12px);
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      height: auto;
+    }
+    
+    .language-toggle:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    .language-toggle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .language-toggle:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* قائمة الهاتف المنسدلة */
+    .hamburger-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1001;
+      margin-left: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+    }
+    
+    .hamburger-menu:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+    }
+    
+    .hamburger-line {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+    
+    /* قائمة الموبايل المنسدلة من المنتصف */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 20, 100, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu .nav-link {
+      width: 80%;
+      max-width: 300px;
+      margin: 10px 0;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    
+    /* قسم فعاليات YLY المركزية */
+    .central-events {
+      padding: 40px 5%;
+      text-align: center;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .section-title {
+      font-size: 2em;
+      color: var(--accent-color);
+      margin: 0 auto 15px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+    
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .event-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .event-card:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(43, 104, 255, 0.3);
+    }
+    
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .event-card:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .event-logo-container {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 15px;
+      position: relative;
+    }
+    
+    .event-logo-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 3px solid var(--accent-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .event-card:hover .event-logo-circle {
+      box-shadow: 0 0 30px rgba(255, 193, 7, 0.8);
+      transform: scale(1.05);
+    }
+    
+    .event-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+    
+    .event-card:hover .event-logo {
+      transform: scale(1.1);
+    }
+    
+    .event-name {
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    /* نافذة البوب أب للفعالية */
+    .event-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    
+    .event-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background: linear-gradient(135deg, rgba(0, 20, 100, 0.9) 0%, rgba(0, 40, 80, 0.95) 100%);
+      border-radius: var(--border-radius);
+      width: 90%;
+      max-width: 600px;
+      padding: 40px;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 30px rgba(43, 104, 255, 0.5);
+      text-align: center;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+    }
+    
+    .close-modal:hover {
+      background: var(--accent-color);
+      color: #000;
+      transform: rotate(90deg);
+    }
+    
+    .modal-logo-container {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+    
+    .modal-logo-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 3px solid var(--accent-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(255, 193, 7, 0.5);
+      overflow: hidden;
+    }
+    
+    .modal-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    
+    .modal-title {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .modal-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+    
+    .modal-description {
+      font-size: 1em;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .modal-actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .learn-more-btn {
+      padding: 12px 30px;
+      border-radius: var(--border-radius);
+      background: linear-gradient(45deg, var(--accent-color), var(--golden-hover));
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+    }
+    
+    .learn-more-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 193, 7, 0.5);
+    }
+    
+    .learn-more-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .learn-more-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* الفوتر */
+    .footer {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px 5% 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: right;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: right;
+    }
+    
+    .footer-col {
+      text-align: right;
+      direction: rtl;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo img {
+      height: 50px;
+    }
+    
+    .footer-about {
+      font-size: 0.9em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: right;
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .footer-social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      font-size: 1.2em;
+    }
+    
+    .footer-social-icon:hover {
+      background: linear-gradient(45deg, #ffc107, #ff9800);
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+      color: #000;
+    }
+    
+    .footer-social-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .footer-social-icon:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .footer-links h3 {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+      text-align: right;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+      text-align: right;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+      text-align: right;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+      text-align: right;
+    }
+    
+    .footer-links a:hover {
+      color: var(--golden-hover);
+      padding-right: 5px;
+    }
+    
+    .footer-search {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+    
+    .footer-search-input {
+      display: flex;
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .footer-search input {
+      padding: 10px 15px;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      width: 100%;
+      transition: all 0.3s;
+    }
+    
+    .footer-search input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 10px rgba(43, 104, 255, 0.5);
+    }
+    
+    .footer-search-btn {
+      padding: 10px 15px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .footer-search-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(43, 104, 255, 0.4);
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 30px 0;
+      grid-column: 1 / -1;
+    }
+    
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9em;
+      opacity: 0.7;
+      grid-column: 1 / -1;
+    }
+    
+    /* تأثيرات الجزيئات */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+    }
+    
+    @keyframes floatParticle {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    /* تعديلات للهواتف المحمولة */
+    @media (max-width: 992px) {
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-bar {
+        flex-wrap: wrap;
+        padding: 10px;
+        justify-content: space-between;
+      }
+      
+      .logo-section {
+        order: 1;
+        flex: 0 0 auto;
+      }
+      
+      .user-actions {
+        order: 2;
+        flex: 0 0 auto;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .hamburger-menu {
+        order: 3;
+        display: flex;
+        margin-left: 0;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu {
+        display: flex;
+      }
+      
+      .section-title {
+        font-size: 1.6rem;
+      }
+      
+      .events-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      
+      .event-card {
+        padding: 15px;
+      }
+      
+      .event-logo-container {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-col {
+        text-align: center;
+      }
+      
+      .footer-links ul {
+        text-align: center;
+      }
+      
+      .footer-links a:hover {
+        padding-right: 0;
+        padding-left: 5px;
+      }
+      
+      .modal-content {
+        padding: 30px 20px;
+      }
+      
+      .modal-logo-container {
+        width: 120px;
+        height: 120px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .section-title {
+        font-size: 1.4rem;
+      }
+      
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .event-logo-container {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .modal-logo-container {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .modal-title {
+        font-size: 1.5em;
+      }
+    }
+    
+    /* تعديلات الفوتر للغة الإنجليزية */
+    [lang="en"] .footer {
+      text-align: left;
+      direction: ltr;
+    }
+    
+    [lang="en"] .footer-content {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-col {
+      text-align: left;
+      direction: ltr;
+    }
+    
+    [lang="en"] .footer-logo {
+      justify-content: flex-start;
+    }
+    
+    [lang="en"] .footer-about {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-social {
+      justify-content: flex-start;
+    }
+    
+    [lang="en"] .footer-links h3 {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links ul {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links li {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links a:hover {
+      padding-right: 0;
+      padding-left: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="overlay"></div>
+<div class="particles" id="particles"></div>
+
+<!-- شريط التنقل الموحد -->
+<div class="nav-bar">
+  <div class="logo-section">
+    <img src="./assets/home/minestry-sports.png" alt="وزارة الشباب والرياضة">
+    <img src="./assets/home/logo-yly-minsttry.png" alt="YLY">
+  </div>
+  
+  <div class="nav-links" id="nav-links">
+    <a href="index.html" class="nav-link" data-ar="الصفحة الرئيسية" data-en="Home"><i data-feather="home"></i> الصفحة الرئيسية</a>
+    <a href="news.html" class="nav-link" data-ar="الأخبار" data-en="News"><i data-feather="file-text"></i> الأخبار</a>
+    <a href="events.html" class="nav-link active" data-ar="الفعاليات" data-en="Events"><i data-feather="calendar"></i> الفعاليات</a>
+    <a href="sponsors.html" class="nav-link" data-ar=" الداعمون" data-en="Sponsors"><i data-feather="users"></i>  الداعمون</a>
+    <a href="about.html" class="nav-link" data-ar="معلومات عنا" data-en="About"><i data-feather="info"></i> معلومات عنا</a>
+    <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"><i data-feather="mail"></i> اتصل بنا</a>
+  </div>
+  
+  <div class="user-actions">
+    <div class="language-toggle" onclick="toggleLanguage()">
+      <i data-feather="globe"></i>
+      <span>العربية / English</span>
+    </div>
+    
+    <div class="hamburger-menu" id="hamburger-menu">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- قائمة الموبايل المنسدلة -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="nav-link" data-ar="الصفحة الرئيسية" data-en="Home"><i data-feather="home"></i> الصفحة الرئيسية</a>
+  <a href="news.html" class="nav-link" data-ar="الأخبار" data-en="News"><i data-feather="file-text"></i> الأخبار</a>
+  <a href="events.html" class="nav-link active" data-ar="الفعاليات" data-en="Events"><i data-feather="calendar"></i> الفعاليات</a>
+  <a href="sponsors.html" class="nav-link" data-ar=" الداعمون" data-en="Sponsors"><i data-feather="users"></i> الداعمون</a>
+  <a href="about.html" class="nav-link" data-ar="معلومات عنا" data-en="About"><i data-feather="info"></i> معلومات عنا</a>
+  <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"><i data-feather="mail"></i> اتصل بنا</a>
+</div>
+
+<!-- قسم فعاليات YLY المركزية -->
+<div id="central" class="central-events">
+  <div class="section-header">
+    <h2 class="section-title" data-ar="فعاليات YLY" data-en="YLY Central Events"> فاعليات YLY المركزية</h2>
+  </div>
+  
+  <div class="events-grid">
+    <!-- فعالية 1 -->
+    <div class="event-card" onclick="openEventModal('event1')">
+      <div class="event-logo-container">
+        <div class="event-logo-circle">
+          <img src="./assets/events/yly-competition.png" alt="YLY Competition" class="event-logo">
+        </div>
+      </div>
+      <h3 class="event-name" data-ar="YLY Competition" data-en="YLY Competition">YLY Competition</h3>
+    </div>
+    
+    <!-- فعالية 2 -->
+    <div class="event-card" onclick="openEventModal('event2')">
+      <div class="event-logo-container">
+        <div class="event-logo-circle">
+          <img src="./assets/events/mostaqpalna.png" alt="Mostqblna" class="event-logo">
+        </div>
+      </div>
+      <h3 class="event-name" data-ar="Mostqblna" data-en="Mostqblna">Mostqblna</h3>
+    </div>
+    
+    <!-- فعالية 3 -->
+    <div class="event-card" onclick="openEventModal('event3')">
+      <div class="event-logo-container">
+        <div class="event-logo-circle">
+          <img src="./assets/events/itson.png" alt="It's On Event" class="event-logo">
+        </div>
+      </div>
+      <h3 class="event-name" data-ar="It's On Event" data-en="It's On Event">It's On Event</h3>
+    </div>
+    
+    <!-- فعالية 4 -->
+    <div class="event-card" onclick="openEventModal('event4')">
+      <div class="event-logo-container">
+        <div class="event-logo-circle">
+          <img src="./assets/events/capitan.png" alt="Capitano Masr" class="event-logo">
+        </div>
+      </div>
+      <h3 class="event-name" data-ar="Capitano Masr" data-en="Capitano Masr">Capitano Masr</h3>
+    </div>
+    
+    <!-- فعالية 5 -->
+    <div class="event-card" onclick="openEventModal('event5')">
+      <div class="event-logo-container">
+        <div class="event-logo-circle">
+          <img src="./assets/events/5in-one.png" alt="5IN1 EVENT" class="event-logo">
+        </div>
+      </div>
+      <h3 class="event-name" data-ar="5IN1 EVENT" data-en="5IN1 EVENT">5IN1 EVENT</h3>
+    </div>
+    
+    <!-- فعالية 6 -->
+    <div class="event-card" onclick="openEventModal('event6')">
+      <div class="event-logo-container">
+        <div class="event-logo-circle">
+          <img src="./assets/events/zayed.png" alt="ماراثون زايد الخيري" class="event-logo">
+        </div>
+      </div>
+      <h3 class="event-name" data-ar="ماراثون زايد الخيري" data-en="Zayed Charity Marathon">ماراثون زايد الخيري</h3>
+    </div>
+    
+    <!-- فعالية 7 -->
+    <div class="event-card" onclick="openEventModal('event7')">
+      <div class="event-logo-container">
+        <div class="event-logo-circle">
+          <img src="./assets/events/power-girls.png" alt="Girls Power" class="event-logo">
+        </div>
+      </div>
+      <h3 class="event-name" data-ar="Girls Power" data-en="Girls Power">Girls Power</h3>
+    </div>
+    
+    <!-- فعالية 8 -->
+    <div class="event-card" onclick="openEventModal('event8')">
+      <div class="event-logo-container">
+        <div class="event-logo-circle">
+          <img src="./assets/events/run.png" alt="RUN" class="event-logo">
+        </div>
+      </div>
+      <h3 class="event-name" data-ar="RUN" data-en="RUN">RUN</h3>
+    </div>
+    
+    <!-- فعالية 9 -->
+    <div class="event-card" onclick="openEventModal('event9')">
+      <div class="event-logo-container">
+        <div class="event-logo-circle">
+          <img src="./assets/events/waseq.png" alt="وثق" class="event-logo">
+        </div>
+      </div>
+      <h3 class="event-name" data-ar="وثق" data-en="Wathaq">وثق</h3>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة البوب أب للفعاليات -->
+<div class="event-modal" id="event-modal">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closeEventModal()">
+      <i data-feather="x"></i>
+    </button>
+    
+    <div class="modal-logo-container">
+      <div class="modal-logo-circle">
+        <img src="" alt="شعار الفعالية" class="modal-logo" id="modal-logo">
+      </div>
+    </div>
+    
+    <h2 class="modal-title" id="modal-title">اسم الفعالية</h2>
+    <p class="modal-description" id="modal-description">وصف الفعالية سيظهر هنا...</p>
+    
+    <div class="modal-actions">
+      <button class="learn-more-btn" id="learn-more-btn" data-ar="معرفة المزيد" data-en="Learn More">معرفة المزيد</button>
+    </div>
+  </div>
+</div>
+
+<!-- الفوتر -->
+<div class="footer">
+  <div class="footer-content">
+    <!-- القسم الأول: الشعار والوصف والروابط الاجتماعية -->
+    <div class="footer-col">
+      <div class="footer-logo">
+        <img src="./assets/home/minestry-sports.png" alt="وزارة الشباب والرياضة" style="width: 50px;">
+        <img src="./assets/home/logo-yly-minsttry.png" alt="YLY" style="width: 50px;">
+      </div>
+      
+      <p class="footer-about" data-ar="مشروع YLY هو مبادرة شبابية تحت رعاية وزارة الشباب والرياضة تهدف إلى تمكين الشباب وتنمية مهاراتهم من خلال المشاركة في تنظيم الفعاليات والأنشطة المجتمعية." data-en="The YLY project is a youth initiative under the auspices of the Ministry of Youth and Sports that aims to empower youth and develop their skills through participation in organizing community events and activities.">
+        مشروع YLY هو مبادرة شبابية تحت رعاية وزارة الشباب والرياضة تهدف إلى تمكين الشباب وتنمية مهاراتهم من خلال المشاركة في تنظيم الفعاليات والأنشطة المجتمعية.
+      </p>
+      
+      <div class="footer-social">
+        <a href="#" class="footer-social-icon"><i data-feather="facebook"></i></a>
+        <a href="#" class="footer-social-icon"><i data-feather="instagram"></i></a>
+        <a href="#" class="footer-social-icon"><i class="bi bi-tiktok"></i></a>
+        <a href="#" class="footer-social-icon"><i data-feather="linkedin"></i></a>
+      </div>
+    </div>
+    
+    <!-- القسم الثاني: روابط سريعة -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+      <ul class="footer-links">
+        <li><a href="index.html" data-ar="الصفحة الرئيسية" data-en="Home">الصفحة الرئيسية</a></li>
+        <li><a href="news.html" data-ar="الأخبار" data-en="News">الأخبار</a></li>
+        <li><a href="events.html" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+        <li><a href="sponsors.html" data-ar=" الداعمون" data-en="Sponsors"> الداعمون</a></li>
+        <li><a href="about.html" data-ar="معلومات عنا" data-en="About">معلومات عنا</a></li>
+        <li><a href="contact.html" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
+      </ul>
+    </div>
+    
+    <!-- القسم الثالث: روابط الصفحة الرئيسية -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="الصفحة الرئيسية" data-en="EVENTS PAGE">صفحة الفعاليات</h3>
+      <ul class="footer-links">
+        <li><a href="#central" data-ar="فعاليات YLY المركزية" data-en="YLY Central Events">فاعليات yly المركزية</a></li>
+      </ul>
+    </div>
+    
+    <!-- القسم الرابع: البحث في الموقع -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="ابحث في الموقع" data-en="Search Site">ابحث في الموقع</h3>
+      <div class="footer-search">
+        <div class="footer-search-input">
+          <input type="text" placeholder="ابحث في الموقع..." data-ar-placeholder="ابحث في الموقع..." data-en-placeholder="Search the site...">
+          <button class="footer-search-btn">
+            <i data-feather="search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- الخط الفاصل -->
+    <div class="footer-divider"></div>
+    
+    <!-- حقوق النشر -->
+    <div class="footer-copyright">
+      <span data-ar="&copy; 2025 جميع الحقوق محفوظة لمشروع YLY - وزارة الشباب والرياضة" data-en="&copy; 2025 All Rights Reserved to YLY Project - Ministry of Youth and Sports">&copy; 2025 جميع الحقوق محفوظة لمشروع YLY - وزارة الشباب والرياضة</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // تهيئة الصفحة
+  document.addEventListener('DOMContentLoaded', function() {
+    // إنشاء الجزيئات المتحركة
+    createParticles();
+    
+    // تهيئة أيقونات Feather
+    feather.replace();
+    
+    // إعداد القائمة المنسدلة للهاتف
+    setupMobileMenu();
+    
+    // بيانات الفعاليات
+    setupEventsData();
+  });
+
+  // بيانات الفعاليات
+  const eventsData = {
+    'event1': {
+      logo: './assets/events/yly-competition.png',
+      title: 'YLY Competition',
+      titleEn: 'YLY Competition',
+      description: 'مسابقة YLY هي منافسة سنوية تهدف إلى اكتشاف المواهب الشابة في مختلف المجالات الرياضية والثقافية والفنية. تقدم المسابقة جوائز قيمة وفرص تدريبية للمتسابقين المتميزين.',
+      descriptionEn: 'The YLY Competition is an annual competition aimed at discovering young talents in various sports, cultural and artistic fields. The competition offers valuable prizes and training opportunities for outstanding contestants.',
+      learnMoreLink: '#'
+    },
+    'event2': {
+      logo: './assets/events/mostaqpalna.png',
+      title: 'Mostqblna',
+      titleEn: 'Mostqblna',
+      description: 'فعالية Mostqblna تهدف إلى تمكين الشباب وتطوير مهاراتهم القيادية من خلال ورش عمل تدريبية وحلقات نقاشية مع خبراء في مختلف المجالات.',
+      descriptionEn: 'The Mostqblna event aims to empower youth and develop their leadership skills through training workshops and discussion sessions with experts in various fields.',
+      learnMoreLink: '#'
+    },
+    'event3': {
+      logo: './assets/events/itson.png',
+      title: 'It\'s On Event',
+      titleEn: 'It\'s On Event',
+      description: 'حدث رياضي ضخم يجمع الشباب من جميع المحافظات للمشاركة في منافسات رياضية متنوعة تشمل كرة القدم، كرة السلة، السباحة وألعاب القوى.',
+      descriptionEn: 'A huge sporting event that brings together youth from all governorates to participate in various sports competitions including football, basketball, swimming and athletics.',
+      learnMoreLink: '#'
+    },
+    'event4': {
+      logo: './assets/events/capitan.png',
+      title: 'Capitano Masr',
+      titleEn: 'Capitano Masr',
+      description: 'برنامج Capitano Masr يهدف إلى اكتشاف القادة الشباب وتأهيلهم لقيادة الفرق والمبادرات الشبابية في مختلف المجالات الرياضية والاجتماعية.',
+      descriptionEn: 'The Capitano Masr program aims to discover young leaders and qualify them to lead teams and youth initiatives in various sports and social fields.',
+      learnMoreLink: '#'
+    },
+    'event5': {
+      logo: './assets/events/5in-one.png',
+      title: '5IN1 EVENT',
+      titleEn: '5IN1 EVENT',
+      description: 'حدث رياضي فريد من نوعه يجمع بين 5 رياضات مختلفة في يوم واحد، حيث يتنافس المشاركون في مسابقات متنوعة تختبر لياقتهم البدنية وقدرتهم على التكيف.',
+      descriptionEn: 'A unique sporting event that combines 5 different sports in one day, where participants compete in various competitions that test their physical fitness and ability to adapt.',
+      learnMoreLink: '#'
+    },
+    'event6': {
+      logo: './assets/events/zayed.png',
+      title: 'ماراثون زايد الخيري',
+      titleEn: 'Zayed Charity Marathon',
+      description: 'ماراثون خيري سنوي يقام تحت رعاية وزارة الشباب والرياضة، حيث يتم تخصيص عائداته لدعم المشاريع الخيرية وتمويل المبادرات الشبابية.',
+      descriptionEn: 'An annual charity marathon held under the auspices of the Ministry of Youth and Sports, where its proceeds are allocated to support charity projects and fund youth initiatives.',
+      learnMoreLink: '#'
+    },
+    'event7': {
+      logo: './assets/events/power-girls.png',
+      title: 'Girls Power',
+      titleEn: 'Girls Power',
+      description: 'فعالية مخصصة لتمكين الفتيات وتنمية مهاراتهن القيادية والرياضية، تشمل ورش عمل وأنشطة رياضية وثقافية مصممة خصيصًا للفتيات.',
+      descriptionEn: 'An event dedicated to empowering girls and developing their leadership and sports skills, including workshops and sports and cultural activities designed specifically for girls.',
+      learnMoreLink: '#'
+    },
+    'event8': {
+      logo: './assets/events/run.png',
+      title: 'RUN',
+      titleEn: 'RUN',
+      description: 'سباق جري سنوي لمسافات مختلفة يهدف إلى تشجيع الشباب على ممارسة الرياضة وتبني نمط حياة صحي، مع توفير جوائز قيمة للمتسابقين.',
+      descriptionEn: 'An annual running race for different distances aimed at encouraging young people to practice sports and adopt a healthy lifestyle, with valuable prizes for competitors.',
+      learnMoreLink: '#'
+    },
+    'event9': {
+      logo: './assets/events/waseq.png',
+      title: 'وثق',
+      titleEn: 'Wathaq',
+      description: 'مبادرة وثق تهدف إلى توثيق الإنجازات الشبابية والرياضية في مصر، من خلال إنشاء أرشيف رقمي للبطولات والإنجازات الرياضية على مستوى الجمهورية.',
+      descriptionEn: 'The Wathaq initiative aims to document youth and sports achievements in Egypt, by creating a digital archive of championships and sports achievements at the republic level.',
+      learnMoreLink: '#'
+    }
+  };
+
+  // تبديل اللغة مع ترجمة كاملة للمحتوى
+  function toggleLanguage() {
+    const currentLang = document.documentElement.lang;
+    const elementsToTranslate = document.querySelectorAll('[data-ar], [data-en]');
+    
+    if (currentLang === 'ar') {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+      document.querySelector('.language-toggle span').textContent = 'English / العربية';
+      document.title = 'Events | YLY';
+    } else {
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      document.querySelector('.language-toggle span').textContent = 'العربية / English';
+      document.title = 'الفعاليات | YLY';
+    }
+    
+    // ترجمة جميع العناصر
+    elementsToTranslate.forEach(el => {
+      if (el.dataset.en && el.dataset.ar) {
+        el.textContent = currentLang === 'ar' ? el.dataset.en : el.dataset.ar;
+      }
+      if (el.dataset.enPlaceholder && el.dataset.arPlaceholder) {
+        el.placeholder = currentLang === 'ar' ? el.dataset.enPlaceholder : el.dataset.arPlaceholder;
+      }
+    });
+    
+    // تحديث اتجاه أيقونات Feather
+    feather.replace();
+  }
+
+  // إنشاء الجزيئات المتحركة
+  function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const count = Math.floor(window.innerWidth / 20);
+    
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      const size = Math.random() * 5 + 2;
+      const posX = Math.random() * window.innerWidth;
+      const duration = Math.random() * 15 + 10;
+      const delay = Math.random() * 10;
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${posX}px`;
+      particle.style.bottom = '0';
+      particle.style.animationDuration = `${duration}s`;
+      particle.style.animationDelay = `${delay}s`;
+      
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  // فتح نافذة البوب أب للفعالية
+  function openEventModal(eventId) {
+    const modal = document.getElementById('event-modal');
+    const modalLogo = document.getElementById('modal-logo');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-description');
+    const learnMoreBtn = document.getElementById('learn-more-btn');
+    
+    const eventData = eventsData[eventId];
+    modalLogo.src = eventData.logo;
+    
+    if (document.documentElement.lang === 'ar') {
+      modalTitle.textContent = eventData.title;
+      modalDesc.textContent = eventData.description;
+      learnMoreBtn.textContent = 'معرفة المزيد';
+    } else {
+      modalTitle.textContent = eventData.titleEn;
+      modalDesc.textContent = eventData.descriptionEn;
+      learnMoreBtn.textContent = 'Learn More';
+    }
+    
+    // تحديث رابط معرفة المزيد
+    learnMoreBtn.onclick = function() {
+      window.location.href = eventData.learnMoreLink;
+    };
+    
+    // إظهار النافذة
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // تحديث أيقونات Feather
+    feather.replace();
+  }
+
+  // إغلاق نافذة البوب أب
+  function closeEventModal() {
+    const modal = document.getElementById('event-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // إعداد القائمة المنسدلة للهاتف
+  function setupMobileMenu() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+    
+    document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // إعداد بيانات الفعاليات
+  function setupEventsData() {
+    // يمكنك إضافة أي إعدادات إضافية للفعاليات هنا إذا لزم الأمر
+  }
+</script>
+</body>
+</html>

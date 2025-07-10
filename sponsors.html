@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الرعاة الرسميين | YLY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"> 
+  <link rel="icon" href="./assets/home/bilo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/home/bilo.png" type="image/x-icon">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    :root {
+      --primary-color: #2b68ff;
+      --primary-hover: #1c4de1;
+      --accent-color: #ffc107;
+      --golden-hover: #ffd700;
+      --text-color: #fff;
+      --bg-overlay: rgba(0, 0, 50, 0.4);
+      --form-bg: rgba(255, 255, 255, 0.1);
+      --input-bg: rgba(255,255,255,0.2);
+      --input-hover: rgba(255,255,255,0.3);
+      --border-radius: 14px;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --mobile-breakpoint: 768px;
+      --tablet-breakpoint: 992px;
+      
+      /* New color variables for sponsor categories */
+      --gold-color: #ffd700;
+      --gold-hover: #ffc107;
+      --silver-color: #c0c0c0;
+      --silver-hover: #a8a8a8;
+      --bronze-color: #cd7f32;
+      --bronze-hover: #b87333;
+      --media-color: #2b68ff;
+      --media-hover: #1c4de1;
+      --strategic-color: #2b68ff;
+      --strategic-hover: #1c4de1;
+      --become-sponsor-color: #ffc107;
+      --become-sponsor-hover: #ffd700;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: url('./assets/home/bg-space.jpg.png') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-color);
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+    
+    .overlay {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(0, 20, 100, 0.7) 0%, rgba(0, 40, 80, 0.8) 100%);
+    }
+    
+    /* شريط التنقل - تحسينات للريسبونسيف */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+      background: transparent;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+      position: relative;
+    }
+    
+    .logo-section img {
+      height: 40px;
+      width: auto;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link {
+      padding: 10px 15px;
+      margin: 0 3px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+      position: relative;
+      cursor: pointer;
+      z-index: 2;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    /* تعديلات لموضع الأزرار في الوضع العربي */
+    [lang="ar"] .user-actions {
+      margin-right: auto;
+      margin-left: 0;
+    }
+    
+    [lang="en"] .user-actions {
+      margin-left: auto;
+      margin-right: 0;
+    }
+    
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 2;
+      min-width: 120px;
+      justify-content: flex-start;
+    }
+    
+    /* تحسينات البحث الجديدة */
+    .search-container {
+      position: relative;
+    }
+
+    .search-icon {
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 8px 12px;
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .search-icon:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+
+    .search-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+
+    .search-icon:hover::before {
+      transform: translateX(100%);
+    }
+
+    .search-bar {
+      position: fixed;
+      top: 70px;
+      right: 5%;
+      width: 90%;
+      max-width: 500px;
+      background: rgba(0, 0, 0, 0.95);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      display: none;
+      z-index: 100;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transform-origin: top center;
+      backdrop-filter: blur(10px);
+    }
+
+    .search-bar.active {
+      display: block;
+      animation: slideDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: var(--border-radius);
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      transition: all 0.3s;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1em;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 10px rgba(43, 104, 255, 0.5);
+      border-color: var(--primary-color);
+    }
+
+    .search-bar input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .search-btn {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border-radius: var(--border-radius);
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      width: 100%;
+    }
+
+    .search-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    /* تعديلات للهاتف */
+    @media (max-width: 768px) {
+      .search-bar {
+        top: 60px;
+        right: 5%;
+        width: 90%;
+        left: auto;
+      }
+      
+      .search-icon {
+        padding: 8px 10px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .search-bar {
+        padding: 12px;
+      }
+      
+      .search-bar input {
+        padding: 10px 12px;
+        font-size: 0.9em;
+      }
+    }
+    
+    /* لغة ذهبية */
+    .language-toggle {
+      font-size: clamp(1em, 1.1vw, 1.2em);
+      padding: clamp(6px, 0.8vw, 10px) clamp(10px, 1.2vw, 12px);
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      height: auto;
+    }
+    
+    .language-toggle:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    .language-toggle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .language-toggle:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* محتوى صفحة الرعاة */
+    .sponsors-section {
+      padding: 60px 5%;
+      text-align: center;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .section-title {
+      font-size: 2.2em;
+      color: var(--accent-color);
+      margin: 0 auto 15px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+    
+    .section-subtitle {
+      font-size: 1.1em;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* تصنيفات الرعاة */
+    .sponsor-categories {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .category-btn {
+      padding: 8px 20px;
+      border-radius: 30px;
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+    }
+    
+    .category-btn[data-category="all"]:hover, 
+    .category-btn[data-category="all"].active {
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    .category-btn[data-category="gold"]:hover, 
+    .category-btn[data-category="gold"].active {
+      background: linear-gradient(45deg, var(--gold-color), var(--gold-hover));
+      color: #000;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    }
+    
+    .category-btn[data-category="silver"]:hover, 
+    .category-btn[data-category="silver"].active {
+      background: linear-gradient(45deg, var(--silver-color), var(--silver-hover));
+      color: #000;
+      box-shadow: 0 0 15px rgba(192, 192, 192, 0.5);
+    }
+    
+    .category-btn[data-category="bronze"]:hover, 
+    .category-btn[data-category="bronze"].active {
+      background: linear-gradient(45deg, var(--bronze-color), var(--bronze-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(205, 127, 50, 0.5);
+    }
+    
+    .category-btn[data-category="media"]:hover, 
+    .category-btn[data-category="media"].active {
+      background: linear-gradient(45deg, var(--media-color), var(--media-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    .category-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .category-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* شبكة الرعاة - تم التعديل حسب الطلب */
+    .sponsors-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .sponsor-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 250px;
+    }
+    
+    .sponsor-card[data-category="gold"] {
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+    
+    .sponsor-card[data-category="silver"] {
+      border: 1px solid rgba(192, 192, 192, 0.3);
+    }
+    
+    .sponsor-card[data-category="bronze"] {
+      border: 1px solid rgba(205, 127, 50, 0.3);
+    }
+    
+    .sponsor-card[data-category="media"] {
+      border: 1px solid rgba(43, 104, 255, 0.3);
+    }
+    
+    /* تعديلات هوفر الكروت لتكون مثل زر تغيير اللغة */
+    .sponsor-card {
+      background: rgba(0, 0, 0, 0.3);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sponsor-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .sponsor-card:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .sponsor-card[data-category="gold"]:hover {
+      background: linear-gradient(45deg, var(--gold-color), var(--gold-hover));
+      color: #000;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    }
+    
+    .sponsor-card[data-category="silver"]:hover {
+      background: linear-gradient(45deg, var(--silver-color), var(--silver-hover));
+      color: #000;
+      box-shadow: 0 0 15px rgba(192, 192, 192, 0.5);
+    }
+    
+    .sponsor-card[data-category="bronze"]:hover {
+      background: linear-gradient(45deg, var(--bronze-color), var(--bronze-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(205, 127, 50, 0.5);
+    }
+    
+    .sponsor-card[data-category="media"]:hover {
+      background: linear-gradient(45deg, var(--media-color), var(--media-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    .sponsor-logo {
+      width: 150px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+    }
+    
+    .sponsor-card:hover .sponsor-logo {
+      transform: scale(1.1);
+    }
+    
+    .sponsor-name {
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+    
+    .sponsor-type {
+      font-size: 0.9em;
+      color: var(--accent-color);
+      padding: 5px 15px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.3);
+      display: inline-block;
+    }
+    
+    .sponsor-desc {
+      font-size: 0.9em;
+      margin-top: 15px;
+      line-height: 1.5;
+      display: none;
+    }
+    
+    .sponsor-card.active .sponsor-desc {
+      display: block;
+    }
+    
+    /* قسم الشركاء الاستراتيجيين - تم التعديل حسب الطلب */
+    .strategic-partners {
+      margin-top: 80px;
+      padding: 40px 5%;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: var(--border-radius);
+    }
+    
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .partner-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+    }
+    
+    .partner-card:hover {
+      background: linear-gradient(45deg, var(--strategic-color), var(--strategic-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    .partner-logo {
+      width: 120px;
+      height: 80px;
+      object-fit: contain;
+      margin: 0 auto 15px;
+      transition: all 0.3s;
+    }
+    
+    .partner-card:hover .partner-logo {
+      transform: scale(1.1);
+    }
+    
+    .partner-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .partner-role {
+      font-size: 0.8em;
+      color: var(--accent-color);
+    }
+    
+    /* تعديلات الريسبونسيف للشركاء الاستراتيجيين */
+    @media (max-width: 992px) {
+      .sponsors-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .sponsors-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .partners-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .partner-card {
+        height: 180px;
+      }
+    }
+    
+    /* قسم كيف تصبح راعياً */
+    .become-sponsor {
+      margin-top: 80px;
+      padding: 40px 5%;
+      background: linear-gradient(135deg, rgba(43, 104, 255, 0.2), rgba(0, 40, 80, 0.3));
+      border-radius: var(--border-radius);
+      text-align: center;
+    }
+    
+    .become-sponsor-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .sponsor-benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 40px 0;
+    }
+    
+    .benefit-card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .benefit-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+      background: linear-gradient(45deg, rgba(255, 193, 7, 0.2), rgba(255, 215, 0, 0.2));
+      border-color: var(--become-sponsor-color);
+    }
+    
+    .benefit-icon {
+      font-size: 2.5em;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+    }
+    
+    .benefit-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .benefit-desc {
+      font-size: 0.9em;
+      line-height: 1.6;
+    }
+    
+    .sponsor-btn {
+      padding: 12px 30px;
+      border-radius: var(--border-radius);
+      background: var(--accent-color);
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s;
+      display: inline-block;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sponsor-btn:hover {
+      background: var(--golden-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 193, 7, 0.3);
+    }
+    
+    .sponsor-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .sponsor-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* تأثيرات الجزيئات */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+    }
+    
+    @keyframes floatParticle {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    /* قائمة الهاتف المنسدلة */
+    .hamburger-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1001;
+      margin-left: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+    }
+    
+    .hamburger-menu:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+    }
+    
+    .hamburger-line {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+    
+    /* قائمة الموبايل المنسدلة من المنتصف */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 20, 100, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu .nav-link {
+      width: 80%;
+      max-width: 300px;
+      margin: 10px 0;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    
+    /* شخصية بيلو التفاعلية - التعديلات الجديدة */
+    .bilo-character {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: biloFloat 3s ease-in-out infinite;
+    }
+
+    .bilo-character img {
+      width: 120px;
+      cursor: pointer;
+      transition: all 0.3s;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+    }
+
+    .bilo-character:hover img {
+      transform: scale(1.1);
+      animation: biloFloatHover 2s ease-in-out infinite;
+    }
+
+    .bilo-tooltip {
+      position: absolute;
+      bottom: 100%;
+      right: 0;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 15px;
+      border-radius: 15px;
+      width: 250px;
+      max-width: 90vw;
+      text-align: center;
+      font-size: 0.85em;
+      line-height: 1.6;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.2);
+      z-index: 1000;
+      white-space: normal;
+      word-wrap: break-word;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .bilo-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 20px;
+      border-width: 8px;
+      border-style: solid;
+      border-color: rgba(255, 255, 255, 0.15) transparent transparent transparent;
+    }
+
+    .bilo-character.active .bilo-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* تعديلات للغة الإنجليزية */
+    [lang="en"] .bilo-character {
+      right: auto;
+      left: 30px;
+    }
+
+    [lang="en"] .bilo-tooltip {
+      right: auto;
+      left: 0;
+      text-align: left;
+    }
+
+    [lang="en"] .bilo-tooltip::after {
+      right: auto;
+      left: 20px;
+    }
+
+    @media (max-width: 992px) {
+      .bilo-character {
+        width: 110px;
+      }
+      
+      .bilo-tooltip {
+        width: 250px;
+        font-size: 0.8em;
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .bilo-character {
+        width: 100px;
+        bottom: 20px;
+      }
+      
+      .bilo-tooltip {
+        width: 200px;
+        max-width: calc(100vw - 30px);
+      }
+      
+      .bilo-tooltip::after {
+        right: 20px;
+      }
+      
+      [lang="en"] .bilo-tooltip::after {
+        left: 20px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .bilo-character {
+        width: 80px;
+        bottom: 15px;
+      }
+      
+      .bilo-tooltip {
+        width: 180px;
+        padding: 10px;
+        font-size: 0.75em;
+      }
+      
+      .bilo-tooltip::after {
+        right: 10px;
+      }
+      
+      [lang="en"] .bilo-tooltip::after {
+        left: 10px;
+      }
+    }
+
+    @keyframes biloFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes biloFloatHover {
+      0%, 100% {
+        transform: translateY(0) scale(1.1);
+      }
+      50% {
+        transform: translateY(-15px) scale(1.1);
+      }
+    }
+    
+    /* الفوتر - تعديلات لجعل كل العناصر تبدأ من اليمين */
+    .footer {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px 5% 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: right;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: right;
+    }
+    
+    .footer-col {
+      text-align: right;
+      direction: rtl;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo img {
+      height: 50px;
+    }
+    
+    .footer-about {
+      font-size: 0.9em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: right;
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .footer-social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      font-size: 1.2em;
+    }
+    
+    .footer-social-icon:hover {
+      background: linear-gradient(45deg, #ffc107, #ff9800);
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+      color: #000;
+    }
+    
+    .footer-social-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .footer-social-icon:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .footer-links h3 {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+      text-align: right;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+      text-align: right;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+      text-align: right;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+      text-align: right;
+    }
+    
+    .footer-links a:hover {
+      color: var(--golden-hover);
+      padding-right: 5px;
+    }
+    
+    /* قسم البحث في الفوتر */
+    .footer-search {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+    
+    .footer-search-input {
+      display: flex;
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .footer-search input {
+      padding: 10px 15px;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      width: 100%;
+      transition: all 0.3s;
+    }
+    
+    .footer-search input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 10px rgba(43, 104, 255, 0.5);
+    }
+    
+    .footer-search-btn {
+      padding: 10px 15px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer-search-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(43, 104, 255, 0.4);
+    }
+    
+    .footer-search-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .footer-search-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 30px 0;
+      grid-column: 1 / -1;
+    }
+    
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9em;
+      opacity: 0.7;
+      grid-column: 1 / -1;
+    }
+    
+    /* تحسينات للهواتف المحمولة */
+    @media (max-width: 1200px) {
+      .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .hamburger-menu {
+        display: flex;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .sponsor-benefits {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-bar {
+        flex-wrap: wrap;
+        padding: 10px;
+        justify-content: space-between;
+      }
+      
+      .logo-section {
+        order: 1;
+        flex: 0 0 auto;
+      }
+      
+      .user-actions {
+        order: 2;
+        flex: 0 0 auto;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .hamburger-menu {
+        order: 3;
+        display: flex;
+        margin-left: 0;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu {
+        display: flex;
+      }
+      
+      .search-container {
+        margin-left: 0;
+      }
+      
+      .search-bar {
+        right: 5%;
+        left: auto;
+        width: 90%;
+      }
+      
+      .language-toggle span {
+        display: none;
+      }
+      
+      /* تعديلات صفحة الرعاة */
+      .sponsor-card {
+        height: 220px;
+        padding: 20px;
+      }
+      
+      .sponsor-logo {
+        width: 120px;
+        height: 80px;
+      }
+      
+      .partner-logo {
+        width: 100px;
+        height: 70px;
+      }
+      
+      .sponsor-benefits {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      /* تعديلات بيلو للهاتف */
+      .bilo-character {
+        width: 100px;
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .bilo-tooltip {
+        width: 200px;
+        font-size: 0.8em;
+        padding: 10px;
+        right: 0;
+      }
+      
+      [lang="en"] .bilo-character {
+        left: 20px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .nav-bar {
+        padding: 8px 10px;
+      }
+      
+      .logo-section img {
+        height: 35px;
+      }
+      
+      .search-icon {
+        padding: 8px;
+      }
+      
+      .search-bar {
+        width: 250px;
+      }
+      
+      .section-title {
+        font-size: 1.8em;
+      }
+      
+      .section-subtitle {
+        font-size: 0.9em;
+      }
+      
+      .sponsor-name {
+        font-size: 1em;
+      }
+      
+      .sponsor-type {
+        font-size: 0.8em;
+      }
+      
+      .partner-card {
+        height: 160px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-col {
+        text-align: center;
+      }
+      
+      .footer-links ul {
+        text-align: center;
+      }
+      
+      .footer-links a:hover {
+        padding-right: 0;
+        padding-left: 5px;
+      }
+      
+      .sponsor-benefits {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .search-bar {
+        width: 220px;
+      }
+      
+      .category-btn {
+        padding: 6px 15px;
+        font-size: 0.85rem;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .section-title {
+        font-size: 1.6em;
+      }
+      
+      .sponsor-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* تعديلات الفوتر للغة الإنجليزية */
+    [lang="en"] .footer {
+      text-align: left;
+      direction: ltr;
+    }
+    
+    [lang="en"] .footer-content {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-col {
+      text-align: left;
+      direction: ltr;
+    }
+    
+    [lang="en"] .footer-logo {
+      justify-content: flex-start;
+    }
+    
+    [lang="en"] .footer-about {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-social {
+      justify-content: flex-start;
+    }
+    
+    [lang="en"] .footer-links h3 {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links ul {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links li {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links a:hover {
+      padding-right: 0;
+      padding-left: 5px;
+    }
+    
+    /* تعديلات النافبار للهاتف */
+    @media (max-width: 768px) {
+      .nav-bar {
+        flex-wrap: nowrap;
+        padding: 10px;
+      }
+      
+      .logo-section {
+        order: 1;
+        flex: 0 0 auto;
+      }
+      
+      .user-actions {
+        order: 2;
+        flex: 0 0 auto;
+        margin-left: auto;
+        margin-right: 10px;
+      }
+      
+      .hamburger-menu {
+        order: 3;
+        margin-left: 0;
+      }
+      
+      .search-container {
+        margin-left: 0;
+      }
+      
+      .search-icon, .language-toggle {
+        padding: 8px 10px;
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="overlay"></div>
+<div class="particles" id="particles"></div>
+
+<!-- شخصية بيلو التفاعلية - النسخة المحسنة -->
+<div class="bilo-character" id="bilo-character">
+  <div class="bilo-tooltip" id="bilo-tooltip">
+    مرحباً! أنا بيلو، صديق رحلتك في مشروع YLY. أنا هنا لمساعدتك في استكشاف الموقع!
+  </div>
+  <img src="./assets/home/bilo-taier.png" alt="بيلو المساعد الشخصي" id="bilo-image">
+</div>
+
+<!-- شريط التنقل الموحد -->
+<div class="nav-bar">
+  <div class="logo-section">
+    <img src="./assets/home/minestry-sports.png" alt="وزارة الشباب والرياضة">
+    <img src="./assets/home/logo-yly-minsttry.png" alt="YLY">
+  </div>
+  
+  <div class="nav-links" id="nav-links">
+    <a href="index.html" class="nav-link" data-ar="الصفحة الرئيسية" data-en="Home"><i data-feather="home"></i> الصفحة الرئيسية</a>
+    <a href="news.html" class="nav-link" data-ar="الأخبار" data-en="News"><i data-feather="file-text"></i> الأخبار</a>
+    <a href="events.html" class="nav-link" data-ar="الفعاليات" data-en="Events"><i data-feather="calendar"></i> الفعاليات</a>
+    <a href="sponsors.html" class="nav-link active" data-ar=" الداعمون" data-en="Sponsors"><i data-feather="users"></i> الداعمون</a>
+    <a href="about.html" class="nav-link" data-ar="معلومات عنا" data-en="About"><i data-feather="info"></i> معلومات عنا</a>
+    <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"><i data-feather="mail"></i> اتصل بنا</a>
+  </div>
+  
+  <div class="user-actions">
+    <div class="language-toggle" onclick="toggleLanguage()">
+      <i data-feather="globe"></i>
+      <span>العربية / English</span>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-icon" id="search-icon">
+        <i data-feather="search"></i>
+      </div>
+      <div class="search-bar" id="search-bar">
+        <input type="text" placeholder="ابحث عن أحداث، أخبار، متطوعين..." data-ar-placeholder="ابحث عن أحداث، أخبار، متطوعين..." data-en-placeholder="Search for events, news, volunteers...">
+        <button class="search-btn" id="search-btn" data-ar="بحث" data-en="Search">بحث</button>
+        <div class="search-results" style="display: none;">
+          <!-- سيتم إضافة نتائج البحث هنا ديناميكيًا -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="hamburger-menu" id="hamburger-menu">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- قائمة الموبايل المنسدلة -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="nav-link" data-ar="الصفحة الرئيسية" data-en="Home"><i data-feather="home"></i> الصفحة الرئيسية</a>
+  <a href="news.html" class="nav-link" data-ar="الأخبار" data-en="News"><i data-feather="file-text"></i> الأخبار</a>
+  <a href="events.html" class="nav-link" data-ar="الفعاليات" data-en="Events"><i data-feather="calendar"></i> الفعاليات</a>
+  <a href="sponsors.html" class="nav-link active" data-ar=" الداعمون" data-en="Sponsors"><i data-feather="users"></i> الداعمون </a>
+  <a href="about.html" class="nav-link" data-ar="معلومات عنا" data-en="About"><i data-feather="info"></i> معلومات عنا</a>
+  <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"><i data-feather="mail"></i> اتصل بنا</a>
+</div>
+
+<!-- قسم الرعاة الرسميين -->
+<div id="sponsor" class="sponsors-section">
+  <div class="section-header">
+    <h1 class="section-title" data-ar="الداعين الرسميين" data-en="Official Sponsors">الداعمين الرسميين</h1>
+    <p class="section-subtitle" data-ar="شركاؤنا الداعمون الذين يساهمون في نجاح مشروع YLY وتمكين الشباب المصري" data-en="Our supporting partners who contribute to the success of the YLY project and the empowerment of Egyptian youth">
+      شركاؤنا الداعمون الذين يساهمون في نجاح مشروع YLY وتمكين الشباب المصري
+    </p>
+  </div>
+  
+  <!-- تصنيفات الرعاة -->
+  <div class="sponsor-categories">
+    <button class="category-btn active" data-category="all" data-ar="الكل" data-en="All">الكل</button>
+    <button class="category-btn" data-category="gold" data-ar="الرعاة الذهبيون" data-en="Gold Sponsors">الرعاة الذهبيون</button>
+    <button class="category-btn" data-category="silver" data-ar="الرعاة الفضيون" data-en="Silver Sponsors">الرعاة الفضيون</button>
+    <button class="category-btn" data-category="bronze" data-ar="الرعاة البرونزيون" data-en="Bronze Sponsors">الرعاة البرونزيون</button>
+    <button class="category-btn" data-category="media" data-ar="الرعاة الإعلاميون" data-en="Media Sponsors">الرعاة الإعلاميون</button>
+  </div>
+  
+  <!-- شبكة الرعاة -->
+  <div class="sponsors-grid" id="sponsors-grid">
+    <!-- الراعي 1 -->
+    <div class="sponsor-card" data-category="gold">
+      <img src="./assets/sponsors/coca.cola.png" alt="كوكاكولا" class="sponsor-logo">
+      <h3 class="sponsor-name">كوكاكولا</h3>
+      <span class="sponsor-type" data-ar="الراعي الذهبي" data-en="Gold Sponsor">الراعي الذهبي</span>
+      <p class="sponsor-desc" data-ar="شركة كوكاكولا تدعم مشروع YLY من خلال توفير المشروبات في الفعاليات والأنشطة المختلفة." data-en="Coca-Cola supports the YLY project by providing beverages at various events and activities.">
+        شركة كوكاكولا تدعم مشروع YLY من خلال توفير المشروبات في الفعاليات والأنشطة المختلفة.
+      </p>
+    </div>
+    
+    <!-- الراعي 2 -->
+    <div class="sponsor-card" data-category="gold">
+      <img src="./assets/sponsors/pepsi.png" alt="بيبسي" class="sponsor-logo">
+      <h3 class="sponsor-name">بيبسي</h3>
+      <span class="sponsor-type" data-ar="الراعي الذهبي" data-en="Gold Sponsor">الراعي الذهبي</span>
+      <p class="sponsor-desc" data-ar="شركة بيبسي تشارك في دعم الفعاليات الرياضية ضمن مشروع YLY من خلال توفير المشروبات والهدايا." data-en="Pepsi participates in supporting sports events within the YLY project by providing beverages and gifts.">
+        شركة بيبسي تشارك في دعم الفعاليات الرياضية ضمن مشروع YLY من خلال توفير المشروبات والهدايا.
+      </p>
+    </div>
+    
+    <!-- الراعي 3 -->
+    <div class="sponsor-card" data-category="silver">
+      <img src="./assets/sponsors/mac.png" alt="ماكدونالدز" class="sponsor-logo">
+      <h3 class="sponsor-name">ماكدونالدز</h3>
+      <span class="sponsor-type" data-ar="الراعي الفضي" data-en="Silver Sponsor">الراعي الفضي</span>
+      <p class="sponsor-desc" data-ar="ماكدونالدز تدعم بعض الفعاليات الخاصة بمشروع YLY من خلال توفير وجبات للمتطوعين." data-en="McDonald's supports some YLY project events by providing meals for volunteers.">
+        ماكدونالدز تدعم بعض الفعاليات الخاصة بمشروع YLY من خلال توفير وجبات للمتطوعين.
+      </p>
+    </div>
+    
+    <!-- الراعي 4 -->
+    <div class="sponsor-card" data-category="silver">
+      <img src="./assets/sponsors/stc.png" alt="STC" class="sponsor-logo">
+      <h3 class="sponsor-name">STC</h3>
+      <span class="sponsor-type" data-ar="الراعي الفضي" data-en="Silver Sponsor">الراعي الفضي</span>
+      <p class="sponsor-desc" data-ar="شركة STC تقدم الدعم التقني والاتصالي لبعض أنشطة مشروع YLY." data-en="STC provides technical and communication support for some YLY project activities.">
+        شركة STC تقدم الدعم التقني والاتصالي لبعض أنشطة مشروع YLY.
+      </p>
+    </div>
+    
+    <!-- الراعي 5 -->
+    <div class="sponsor-card" data-category="bronze">
+      <img src="./assets/sponsors/mbc.png" alt="MBC" class="sponsor-logo">
+      <h3 class="sponsor-name">MBC</h3>
+      <span class="sponsor-type" data-ar="الراعي البرونزي" data-en="Bronze Sponsor">الراعي البرونزي</span>
+      <p class="sponsor-desc" data-ar="قناة MBC هي الشريك الإعلامي الرسمي لمشروع YLY، حيث تغطي الفعاليات والأنشطة على قنواتها." data-en="MBC channel is the official media partner of the YLY project, covering events and activities on its channels.">
+        قناة MBC هي الشريك الإعلامي الرسمي لمشروع YLY، حيث تغطي الفعاليات والأنشطة على قنواتها.
+      </p>
+    </div>
+    
+    <!-- الراعي 6 -->
+    <div class="sponsor-card" data-category="bronze">
+      <img src="./assets/sponsors/dmc.png" alt="DMC" class="sponsor-logo">
+      <h3 class="sponsor-name">DMC</h3>
+      <span class="sponsor-type" data-ar="الراعي البرونزي" data-en="Bronze Sponsor">الراعي البرونزي</span>
+      <p class="sponsor-desc" data-ar="قناة DMC تقدم الدعم الإعلامي لمشروع YLY من خلال تغطية الفعاليات وإجراء المقابلات مع القائمين على المشروع." data-en="DMC channel provides media support for the YLY project by covering events and conducting interviews with project officials.">
+        قناة DMC تقدم الدعم الإعلامي لمشروع YLY من خلال تغطية الفعاليات وإجراء المقابلات مع القائمين على المشروع.
+      </p>
+    </div>
+
+        <!-- الراعي 7 -->
+<div class="sponsor-card" data-category="media">
+  <img src="./assets/sponsors/rotana.png" alt="روتانا" class="sponsor-logo">
+  <h3 class="sponsor-name" data-ar="روتانا" data-en="Rotana Media">روتانا</h3>
+  <span class="sponsor-type" data-ar="الراعي الإعلامي" data-en="Media Sponsor">الراعي الإعلامي</span>
+  <p class="sponsor-desc" data-ar="مجموعة روتانا الإعلامية تقدم الدعم الإعلامي لمشروع YLY عبر قنواتها المختلفة." data-en="Rotana Media Group provides media support for YLY project through its various channels.">
+    مجموعة روتانا الإعلامية تقدم الدعم الإعلامي لمشروع YLY عبر قنواتها المختلفة.
+  </p>
+</div>
+
+        <!-- الراعي 8 -->
+<div class="sponsor-card" data-category="media">
+  <img src="./assets/sponsors/cbc.png" alt="سي-بي-سي" class="sponsor-logo">
+  <h3 class="sponsor-name" data-ar="سي-بي-سي" data-en="CBC Network">سي-بي-سي</h3>
+  <span class="sponsor-type" data-ar="الراعي الإعلامي" data-en="Media Sponsor">الراعي الإعلامي</span>
+  <p class="sponsor-desc" data-ar="قناة سي-بي-سي تقدم تغطية إعلامية واسعة لفعاليات وأنشطة مشروع YLY." data-en="CBC network provides extensive media coverage for YLY project events and activities.">
+    قناة سي-بي-سي تقدم تغطية إعلامية واسعة لفعاليات وأنشطة مشروع YLY.
+  </p>
+</div>
+
+  </div>
+  
+  
+  
+  <!-- الشركاء الاستراتيجيون - تم التعديل -->
+  <div id="strategic" class="strategic-partners">
+    <h2 class="section-title" data-ar="الشركاء الاستراتيجيون" data-en="Strategic Partners">الشركاء الاستراتيجيون</h2>
+    <p class="section-subtitle" data-ar="شركاؤنا الذين يقدمون الدعم الاستراتيجي لمشروع YLY على مدار العام" data-en="Our partners who provide strategic support to the YLY project throughout the year">
+      شركاؤنا الذين يقدمون الدعم الاستراتيجي لمشروع YLY على مدار العام
+    </p>
+
+    <br><br>
+    
+    <div class="partners-grid">
+      <!-- الشريك 1 -->
+      <div class="partner-card">
+        <img src="./assets/sponsors/egy bank.png" alt="بنك مصر" class="partner-logo">
+        <h3 class="partner-name">بنك مصر</h3>
+        <p class="partner-role" data-ar="الشريك المالي" data-en="Financial Partner">الشريك المالي</p>
+      </div>
+      
+      <!-- الشريك 2 -->
+      <div class="partner-card">
+        <img src="./assets/sponsors/ibm.png" alt="IBM" class="partner-logo">
+        <h3 class="partner-name">IBM</h3>
+        <p class="partner-role" data-ar="الشريك التقني" data-en="Technical Partner">الشريك التقني</p>
+      </div>
+      
+      <!-- الشريك 3 -->
+      <div class="partner-card">
+        <img src="./assets/sponsors/unisco.png" alt="اليونسكو" class="partner-logo">
+        <h3 class="partner-name">اليونسكو</h3>
+        <p class="partner-role" data-ar="الشريك الدولي" data-en="International Partner">الشريك الدولي</p>
+      </div>
+      
+      <!-- الشريك 4 -->
+      <div class="partner-card">
+        <img src="./assets/home/logo-ministry.png" alt="وزارة الشباب والرياضة" class="partner-logo">
+        <h3 class="partner-name">وزارة الشباب والرياضة</h3>
+        <p class="partner-role" data-ar="المؤسس المحلي" data-en="Local founder"> المؤسس المحلي</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- كيف تصبح راعياً -->
+  <div id="become-sponsor" class="become-sponsor">
+    <div class="become-sponsor-content">
+      <h2 class="section-title" data-ar="كيف تصبح داعماً؟" data-en="How to Become a Sponsor?">كيف تصبح داعماً؟</h2>
+      <p class="section-subtitle" data-ar="انضم إلى قائمة الرعاة الداعمين لمشروع YLY واستفد من الفرص التسويقية والاستثمارية الفريدة" data-en="Join the list of sponsors supporting the YLY project and benefit from unique marketing and investment opportunities">
+        انضم إلى قائمة الرعاة الداعمين لمشروع YLY واستفد من الفرص التسويقية والاستثمارية الفريدة
+      </p>
+      
+      <div class="sponsor-benefits">
+        <!-- فائدة 1 -->
+        <div class="benefit-card">
+          <div class="benefit-icon"><i data-feather="award"></i></div>
+          <h3 class="benefit-title" data-ar="الظهور الإعلامي" data-en="Media Exposure">الظهور الإعلامي</h3>
+          <p class="benefit-desc" data-ar="ظهور شعار شركتك في جميع الفعاليات والمواد الإعلامية الخاصة بالمشروع" data-en="Your company logo appears in all project events and media materials">
+            ظهور شعار شركتك في جميع الفعاليات والمواد الإعلامية الخاصة بالمشروع
+          </p>
+        </div>
+        
+        <!-- فائدة 2 -->
+        <div class="benefit-card">
+          <div class="benefit-icon"><i data-feather="users"></i></div>
+          <h3 class="benefit-title" data-ar="الوصول للشباب" data-en="Youth Reach">الوصول للشباب</h3>
+          <p class="benefit-desc" data-ar="فرصة الوصول إلى آلاف الشباب المستهدفين من خلال الفعاليات والأنشطة" data-en="Opportunity to reach thousands of targeted youth through events and activities">
+            فرصة الوصول إلى آلاف الشباب المستهدفين من خلال الفعاليات والأنشطة
+          </p>
+        </div>
+        
+        
+        <!-- فائدة 3 -->
+        <div class="benefit-card">
+          <div class="benefit-icon"><i data-feather="trending-up"></i></div>
+          <h3 class="benefit-title" data-ar="تعزيز السمعة" data-en="Reputation Boost">تعزيز السمعة</h3>
+          <p class="benefit-desc" data-ar="تعزيز سمعة شركتك كشركة مسؤولة اجتماعياً وداعمة للشباب" data-en="Enhance your company's reputation as a socially responsible company that supports youth">
+            تعزيز سمعة شركتك كشركة مسؤولة اجتماعياً وداعمة للشباب
+          </p>
+        </div>
+      </div>
+      
+      <button class="sponsor-btn" onclick="window.location.href='contact.html'" data-ar="تواصل معنا لتصبح راعياً" data-en="Contact Us to Become a Sponsor">تواصل معنا لتصبح راعياً</button>
+    </div>
+  </div>
+</div>
+
+<!-- الفوتر -->
+<div class="footer">
+  <div class="footer-content">
+    <!-- القسم الأول: الشعار والوصف والروابط الاجتماعية -->
+    <div class="footer-col">
+      <div class="footer-logo">
+        <img src="./assets/home/minestry-sports.png" alt="وزارة الشباب والرياضة" style="width: 50px;">
+        <img src="./assets/home/logo-yly-minsttry.png" alt="YLY" style="width: 50px;">
+      </div>
+      
+      <p class="footer-about" data-ar="مشروع YLY هو مبادرة شبابية تحت رعاية وزارة الشباب والرياضة تهدف إلى تمكين الشباب وتنمية مهاراتهم من خلال المشاركة في تنظيم الفعاليات والأنشطة المجتمعية." data-en="The YLY project is a youth initiative under the auspices of the Ministry of Youth and Sports that aims to empower youth and develop their skills through participation in organizing community events and activities.">
+        مشروع YLY هو مبادرة شبابية تحت رعاية وزارة الشباب والرياضة تهدف إلى تمكين الشباب وتنمية مهاراتهم من خلال المشاركة في تنظيم الفعاليات والأنشطة المجتمعية.
+      </p>
+      
+      <div class="footer-social">
+        <a href="#" class="footer-social-icon"><i data-feather="facebook"></i></a>
+        <a href="#" class="footer-social-icon"><i data-feather="instagram"></i></a>
+        <a href="#" class="footer-social-icon"><i class="bi bi-tiktok"></i></a>
+        <a href="#" class="footer-social-icon"><i data-feather="linkedin"></i></a>
+      </div>
+    </div>
+    
+    <!-- القسم الثاني: روابط سريعة -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+      <ul class="footer-links">
+        <li><a href="home.html" data-ar="الصفحة الرئيسية" data-en="Home">الصفحة الرئيسية</a></li>
+        <li><a href="news.html" data-ar="الأخبار" data-en="News">الأخبار</a></li>
+        <li><a href="events.html" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+        <li><a href="sponsors.html" data-ar=" الداعمون" data-en="Sponsors"> الداعمون</a></li>
+        <li><a href="about.html" data-ar="معلومات عنا" data-en="About">معلومات عنا</a></li>
+        <li><a href="contact.html" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
+      </ul>
+    </div>
+    
+    <!-- القسم الثالث: روابط الصفحة الرئيسية -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="صفحة الداعمون " data-en="HOME PAGE">صفحة الداعمون </h3>
+      <ul class="footer-links">
+        <li><a href="#sponsor" data-ar="الداعمين الرسميين" data-en=" Official sponsors ">الداعمون الرسميون </a></li>
+        <li><a href="#strategic" data-ar="الشركاء الاستراتيجيين" data-en="Strategic partners">  الشركاء الاستراتيجيين</a></li>
+        <li><a href="#become-sponsor" data-ar=" كيف تصبح داعماً؟ " data-en="How to become a sponsor.?">  كيف تصبح داعماً؟</a></li>
+      </ul>
+    </div>
+    
+    <!-- القسم الرابع: البحث في الموقع -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="ابحث في الموقع" data-en="Search Site">ابحث في الموقع</h3>
+      <div class="footer-search">
+        <div class="footer-search-input">
+          <input type="text" placeholder="ابحث في الموقع..." data-ar-placeholder="ابحث في الموقع..." data-en-placeholder="Search the site...">
+          <button class="footer-search-btn">
+            <i data-feather="search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- الخط الفاصل -->
+    <div class="footer-divider"></div>
+    
+    <!-- حقوق النشر -->
+    <div class="footer-copyright">
+      <span data-ar="&copy; 2025 جميع الحقوق محفوظة لمشروع YLY - وزارة الشباب والرياضة" data-en="&copy; 2025 All Rights Reserved to YLY Project - Ministry of Youth and Sports">&copy; 2025 جميع الحقوق محفوظة لمشروع YLY - وزارة الشباب والرياضة</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // تهيئة الصفحة
+  document.addEventListener('DOMContentLoaded', function() {
+    // إنشاء الجزيئات المتحركة
+    createParticles();
+    
+    // تفعيل البحث
+    setupSearch();
+    
+    // التحكم في القائمة المنسدلة على الموبايل
+    setupMobileMenu();
+    
+    // تهيئة شخصية بيلو التفاعلية
+    setupBiloCharacter();
+    
+    // تصفية الرعاة حسب التصنيف
+    setupSponsorFilter();
+    
+    // تفعيل بطاقات الرعاة
+    setupSponsorCards();
+    
+    // تحميل أيقونات Feather
+    feather.replace();
+  });
+
+  // تبديل اللغة مع ترجمة كاملة للمحتوى
+  function toggleLanguage() {
+    const currentLang = document.documentElement.lang;
+    const elementsToTranslate = document.querySelectorAll('[data-ar], [data-en]');
+    
+    if (currentLang === 'ar') {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+      document.querySelector('.language-toggle span').textContent = 'English / العربية';
+      document.title = 'Sponsors | YLY';
+      
+      // ترجمة جميع العناصر
+      elementsToTranslate.forEach(el => {
+        if (el.dataset.en) {
+          el.textContent = el.dataset.en;
+        }
+        if (el.dataset.enPlaceholder) {
+          el.placeholder = el.dataset.enPlaceholder;
+        }
+      });
+      
+      // تحديث النصوص الديناميكية
+      document.querySelector('.bilo-tooltip').textContent = 'Hello! I am Bilo, your companion on the YLY project journey. I am here to help you explore the site!';
+      
+      // تحديث اتجاه أيقونات Feather
+      feather.replace();
+    } else {
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      document.querySelector('.language-toggle span').textContent = 'العربية / English';
+      document.title = 'الرعاة الرسميين | YLY';
+      
+      // إعادة النصوص إلى العربية
+      elementsToTranslate.forEach(el => {
+        if (el.dataset.ar) {
+          el.textContent = el.dataset.ar;
+        }
+        if (el.dataset.arPlaceholder) {
+          el.placeholder = el.dataset.arPlaceholder;
+        }
+      });
+      
+      // تحديث النصوص الديناميكية
+      document.querySelector('.bilo-tooltip').textContent = 'مرحباً! أنا بيلو، صديق رحلتك في مشروع YLY. أنا هنا لمساعدتك في استكشاف الموقع!';
+      
+      // تحديث اتجاه أيقونات Feather
+      feather.replace();
+    }
+  }
+
+  // إنشاء الجزيئات المتحركة
+  function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const count = Math.floor(window.innerWidth / 20);
+    
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      const size = Math.random() * 5 + 2;
+      const posX = Math.random() * window.innerWidth;
+      const duration = Math.random() * 15 + 10;
+      const delay = Math.random() * 10;
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${posX}px`;
+      particle.style.bottom = '0';
+      particle.style.animationDuration = `${duration}s`;
+      particle.style.animationDelay = `${delay}s`;
+      
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  // تفعيل البحث
+  function setupSearch() {
+    const searchIcon = document.getElementById('search-icon');
+    const searchBar = document.getElementById('search-bar');
+    const searchBtn = document.getElementById('search-btn');
+    
+    searchIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchBar.classList.toggle('active');
+      
+      if (searchBar.classList.contains('active')) {
+        searchBar.querySelector('input').focus();
+      }
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container') && !e.target.closest('.search-bar')) {
+        searchBar.classList.remove('active');
+      }
+    });
+    
+    searchBar.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+    
+    // تفعيل زر البحث
+    searchBtn.addEventListener('click', function() {
+      const searchTerm = document.querySelector('.search-bar input').value;
+      if (searchTerm.trim() !== '') {
+        alert('سيتم البحث عن: ' + searchTerm);
+        // هنا يمكنك إضافة منطق البحث الفعلي
+      }
+    });
+    
+    // تفعيل البحث عند الضغط على Enter
+    document.querySelector('.search-bar input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const searchTerm = this.value;
+        if (searchTerm.trim() !== '') {
+          alert('سيتم البحث عن: ' + searchTerm);
+          // هنا يمكنك إضافة منطق البحث الفعلي
+        }
+      }
+    });
+  }
+  
+  // إعداد القائمة المنسدلة للهاتف
+  function setupMobileMenu() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+    
+    document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-bar') && mobileMenu.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+  
+  // تصفية الرعاة حسب التصنيف
+  function setupSponsorFilter() {
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const sponsorCards = document.querySelectorAll('.sponsor-card');
+    
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // إزالة الفعال من جميع الأزرار
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        // إضافة الفعال للزر المحدد
+        this.classList.add('active');
+        
+        const category = this.dataset.category;
+        
+        // تصفية الرعاة
+        sponsorCards.forEach(card => {
+          if (category === 'all' || card.dataset.category === category) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+  
+  // تفعيل بطاقات الرعاة لعرض التفاصيل
+  function setupSponsorCards() {
+    const sponsorCards = document.querySelectorAll('.sponsor-card');
+    
+    sponsorCards.forEach(card => {
+      card.addEventListener('click', function() {
+        // إزالة الفعال من جميع البطاقات
+        sponsorCards.forEach(c => c.classList.remove('active'));
+        // إضافة الفعال للبطاقة المحددة
+        this.classList.add('active');
+      });
+    });
+  }
+  
+  // إعداد شخصية بيلو التفاعلية - النسخة المحسنة
+  function setupBiloCharacter() {
+    const biloCharacter = document.getElementById('bilo-character');
+    const biloTooltip = document.getElementById('bilo-tooltip');
+    const biloImage = document.getElementById('bilo-image');
+    
+    // قائمة بالرسائل المختلفة لشخصية بيلو
+    const biloMessages = [
+      "مرحباً! أنا بيلو، صديق رحلتك في مشروع YLY. أنا هنا لمساعدتك في استكشاف الموقع!",
+      "هل تعلم أنك يمكن أن تصبح راعياً لمشروع YLY وتدعم الشباب المصري؟ اضغط علي لمعرفة المزيد!",
+      "انضم إلى قائمة الرعاة الداعمين لمشروع YLY واستفد من الفرص التسويقية الفريدة!",
+      "دعمك لمشروع YLY يساهم في تمكين الشباب وتنمية مهاراتهم. كن جزءاً من رحلتنا!",
+      "الرعاة هم عماد نجاح مشروع YLY. هل تريد أن تكون واحداً منهم؟ تواصل معنا الآن!"
+    ];
+    
+    // رسالة ترحيبية عند تحميل الصفحة مع تأثيرات
+    setTimeout(() => {
+      biloTooltip.textContent = biloMessages[0];
+      biloCharacter.classList.add('active');
+      biloCharacter.classList.add('bilo-welcoming');
+      
+      setTimeout(() => {
+        biloCharacter.classList.remove('active');
+        biloCharacter.classList.remove('bilo-welcoming');
+      }, 10000);
+    }, 1500);
+    
+    // تغيير الرسائل بشكل دوري
+    let currentMessageIndex = 1;
+    setInterval(() => {
+      biloTooltip.textContent = biloMessages[currentMessageIndex];
+      biloCharacter.classList.add('active');
+      
+      setTimeout(() => {
+        biloCharacter.classList.remove('active');
+      }, 10000);
+      
+      currentMessageIndex = (currentMessageIndex + 1) % biloMessages.length;
+    }, 20000);
+    
+    // إظهار الرسالة عند النقر على بيلو
+    biloCharacter.addEventListener('click', function() {
+      const randomMessage = biloMessages[Math.floor(Math.random() * biloMessages.length)];
+      biloTooltip.textContent = randomMessage;
+      biloCharacter.classList.add('active');
+      biloCharacter.classList.add('bilo-dancing');
+      
+      setTimeout(() => {
+        biloCharacter.classList.remove('active');
+        biloCharacter.classList.remove('bilo-dancing');
+      }, 10000);
+    });
+    
+    // تأثير اهتزاز عند المرور بالفأرة
+    biloCharacter.addEventListener('mouseenter', function() {
+      biloCharacter.classList.add('bilo-welcoming');
+    });
+    
+    biloCharacter.addEventListener('mouseleave', function() {
+      biloCharacter.classList.remove('bilo-welcoming');
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الأخبار | YLY</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/home/bilo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/home/bilo.png" type="image/x-icon">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    :root {
+      --primary-color: #2b68ff;
+      --primary-hover: #1c4de1;
+      --accent-color: #ffc107;
+      --golden-hover: #ffd700;
+      --text-color: #fff;
+      --bg-overlay: rgba(0, 0, 50, 0.4);
+      --form-bg: rgba(255, 255, 255, 0.1);
+      --input-bg: rgba(255,255,255,0.2);
+      --input-hover: rgba(255,255,255,0.3);
+      --border-radius: 14px;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --mobile-breakpoint: 768px;
+      --tablet-breakpoint: 992px;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: url('./assets/home/bg-space.jpg.png') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-color);
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+    
+    .overlay {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(0, 20, 100, 0.7) 0%, rgba(0, 40, 80, 0.8) 100%);
+    }
+    
+    /* شريط التنقل - تحسينات للريسبونسيف */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+      background: transparent;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+      position: relative;
+    }
+    
+    .logo-section img {
+      height: 40px;
+      width: auto;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link {
+      padding: 10px 15px;
+      margin: 0 3px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+      position: relative;
+      cursor: pointer;
+      z-index: 2;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    /* تعديلات لموضع الأزرار في الوضع العربي */
+    [lang="ar"] .user-actions {
+      margin-right: auto;
+      margin-left: 0;
+    }
+    
+    [lang="en"] .user-actions {
+      margin-left: auto;
+      margin-right: 0;
+    }
+    
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 2;
+      min-width: 120px;
+      justify-content: flex-start;
+    }
+    
+    /* تحسينات البحث الجديدة */
+    .search-container {
+      position: relative;
+    }
+
+    .search-icon {
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 8px 12px;
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .search-icon:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+
+    .search-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+
+    .search-icon:hover::before {
+      transform: translateX(100%);
+    }
+
+    .search-bar {
+      position: fixed;
+      top: 70px;
+      right: 5%;
+      width: 90%;
+      max-width: 500px;
+      background: rgba(0, 0, 0, 0.95);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      display: none;
+      z-index: 100;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transform-origin: top center;
+      backdrop-filter: blur(10px);
+    }
+
+    .search-bar.active {
+      display: block;
+      animation: slideDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      transition: all 0.3s;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1em;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 10px rgba(43, 104, 255, 0.5);
+      border-color: var(--primary-color);
+    }
+
+    .search-bar input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .search-btn {
+      padding: 8px 15px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .search-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    /* لغة ذهبية */
+    .language-toggle {
+      font-size: clamp(1em, 1.1vw, 1.2em);
+      padding: clamp(6px, 0.8vw, 10px) clamp(10px, 1.2vw, 12px);
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      height: auto;
+    }
+    
+    .language-toggle:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(43, 104, 255, 0.5);
+    }
+    
+    .language-toggle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .language-toggle:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* صفحة الأخبار الرئيسية */
+    .news-page {
+      padding: 60px 5% 40px;
+      min-height: 100vh;
+    }
+    
+    .news-header {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    
+    .news-title {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .news-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+    
+    .news-subtitle {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+    
+    /* تصفية الأخبار - تحسينات لتكبير الأزرار */
+    .news-filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    
+    .filter-btn {
+      padding: 12px 25px;
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      font-size: 1rem;
+      min-width: 150px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: 'Cairo', sans-serif;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(43, 104, 255, 0.4);
+    }
+    
+    .filter-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .filter-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* شبكة بطاقات الأخبار */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    
+    .news-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+    
+    .news-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+      background: rgba(43, 104, 255, 0.1);
+    }
+    
+    .news-card:hover .news-image {
+      transform: scale(1.05);
+    }
+    
+    .news-image-container {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .news-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .news-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      padding: 5px 15px;
+      border-radius: 20px;
+      background: var(--primary-color);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+    
+    .news-content {
+      padding: 20px;
+    }
+    
+    .news-date {
+      font-size: 0.8rem;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .news-date i {
+      font-size: 1rem;
+    }
+    
+    .news-card-title {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+    
+    .news-excerpt {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+    
+    /* زر تحميل المزيد - تحسينات لتكبيره وجعله عريضًا */
+    .read-more-btn {
+      padding: 15px 35px;
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      font-size: 1rem;
+      min-width: 250px;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: 'Cairo', sans-serif;
+    }
+    
+    .read-more-btn:hover {
+      background: linear-gradient(45deg, #ffc107, #ff9800);
+      color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+    }
+    
+    .read-more-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .read-more-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* ========== بداية التعديلات على سلايدر الأخبار المميزة ========== */
+    /* أخبار مميزة - سلايدر - النسخة المحسنة */
+  .featured-news {
+  margin: 0 auto 60px;
+  max-width: 1400px;
+  position: relative;
+}
+
+.featured-slider {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  margin-bottom: 40px;
+}
+
+.featured-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 100px; /* مسافة مناسبة من الأسفل */
+}
+
+.featured-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.featured-slide.active {
+  opacity: 1;
+  display: flex; /* تأكيد ظهور العناصر */
+}
+
+.featured-content {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 40px;
+  z-index: 2;
+  margin-bottom: 30px;
+}
+
+/* المحاذاة حسب اللغة */
+[lang="ar"] .featured-content {
+  text-align: right;
+}
+
+[lang="en"] .featured-content {
+  text-align: left;
+}
+
+/* العلامة المميزة */
+.featured-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: var(--accent-color);
+  color: #000;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+[lang="ar"] .featured-badge {
+  float: right;
+}
+
+[lang="en"] .featured-badge {
+  float: left;
+}
+
+/* العنوان والمحتوى */
+.featured-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  line-height: 1.3;
+  clear: both;
+}
+
+.featured-excerpt {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+    .featured-link {
+      padding: 15px 35px;
+      border-radius: var(--border-radius);
+      background: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      font-size: 1.1rem;
+    }
+
+    .featured-link:hover {
+      background: var(--primary-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(43, 104, 255, 0.4);
+    }
+
+    .featured-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+
+    .featured-link:hover::before {
+      transform: translateX(100%);
+    }
+
+[lang="ar"] .featured-link {
+  float: right;
+}
+
+[lang="en"] .featured-link {
+  float: left;
+}
+
+/* تأثيرات الـ hover (في حالة رغبت في إعادتها) */
+.featured-link:hover {
+  background: var(--primary-hover);
+}
+
+/* وسائط الاستجابة */
+@media (max-width: 768px) {
+  .featured-slider {
+    height: 500px;
+  }
+  
+  .featured-slide {
+    padding-bottom: 80px;
+  }
+}
+
+@media (max-width: 576px) {
+  .featured-slider {
+    height: 450px;
+  }
+  
+  .featured-slide {
+    padding-bottom: 60px;
+  }
+  
+  .featured-title {
+    font-size: 2rem;
+  }
+  
+  .featured-excerpt {
+    font-size: 1rem;
+  }
+}
+
+    .featured-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .featured-nav:hover {
+      background: var(--golden-hover);
+      color: #000;
+    }
+
+    .featured-prev {
+      right: 30px;
+    }
+
+    .featured-next {
+      left: 30px;
+    }
+
+    /* تعديلات للغة الإنجليزية */
+    [lang="en"] .featured-content {
+      text-align: center;
+    }
+
+    [lang="en"] .featured-excerpt {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* تعديلات للريسبونسيف */
+    @media (max-width: 1200px) {
+      .featured-slider {
+        height: 550px;
+      }
+    
+      .featured-title {
+        font-size: 2.2rem;
+      }
+    
+      .featured-excerpt {
+        font-size: 1.1rem;
+        max-width: 700px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .featured-slider {
+        height: 500px;
+      }
+    
+      .featured-content {
+        padding: 30px;
+        margin-top: 80px;
+      }
+    
+      .featured-title {
+        font-size: 2rem;
+      }
+    
+      .featured-excerpt {
+        font-size: 1rem;
+        max-width: 600px;
+      }
+    
+      .featured-link {
+        padding: 12px 30px;
+      }
+    
+      .featured-nav {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .featured-slider {
+        height: 450px;
+      }
+    
+      .featured-content {
+        padding: 25px;
+        margin-top: 60px;
+      }
+    
+      .featured-title {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+      }
+    
+      .featured-excerpt {
+        font-size: 0.95rem;
+        max-width: 500px;
+        margin-bottom: 20px;
+      }
+    
+      .featured-badge {
+        font-size: 0.9rem;
+        padding: 6px 15px;
+        margin-bottom: 15px;
+      }
+    
+      .featured-link {
+        padding: 10px 25px;
+        font-size: 1rem;
+      }
+    
+      .featured-nav {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+      }
+    
+      .featured-prev {
+        right: 15px;
+      }
+    
+      .featured-next {
+        left: 15px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .featured-slider {
+        height: 400px;
+      }
+    
+      .featured-content {
+        padding: 20px;
+        margin-top: 50px;
+      }
+    
+      .featured-title {
+        font-size: 1.5rem;
+      }
+    
+      .featured-excerpt {
+        font-size: 0.9rem;
+        max-width: 100%;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    
+      .featured-badge {
+        font-size: 0.85rem;
+        padding: 5px 12px;
+        margin-bottom: 12px;
+      }
+    
+      .featured-link {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+      }
+    
+      .featured-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .featured-slider {
+        height: 350px;
+      }
+    
+      .featured-content {
+        padding: 15px;
+        margin-top: 40px;
+      }
+    
+      .featured-title {
+        font-size: 1.3rem;
+      }
+    
+      .featured-excerpt {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 2;
+      }
+    
+      .featured-link {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+      }
+    }
+    /* ========== نهاية التعديلات على سلايدر الأخبار المميزة ========== */
+    
+    /* تأثيرات الجزيئات */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+    }
+    
+    @keyframes floatParticle {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    /* قائمة الهاتف المنسدلة */
+    .hamburger-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1001;
+      margin-left: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+    }
+    
+    .hamburger-menu:hover {
+      background: linear-gradient(45deg, #2b68ff, #1c4de1);
+    }
+    
+    .hamburger-line {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+    
+    /* قائمة الموبايل المنسدلة من المنتصف */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 20, 100, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu .nav-link {
+      width: 80%;
+      max-width: 300px;
+      margin: 10px 0;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    
+    /* شخصية بيلو التفاعلية - التعديلات الجديدة */
+    .bilo-character {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: biloFloat 3s ease-in-out infinite;
+    }
+
+    .bilo-character img {
+      width: 120px;
+      cursor: pointer;
+      transition: all 0.3s;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+    }
+
+    .bilo-character:hover img {
+      transform: scale(1.1);
+      animation: biloFloatHover 2s ease-in-out infinite;
+    }
+
+    .bilo-tooltip {
+      position: absolute;
+      bottom: 100%;
+      right: 0;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 15px;
+      border-radius: 15px;
+      width: 250px;
+      max-width: 90vw;
+      text-align: center;
+      font-size: 0.85em;
+      line-height: 1.6;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.2);
+      z-index: 1000;
+      white-space: normal;
+      word-wrap: break-word;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .bilo-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 20px;
+      border-width: 8px;
+      border-style: solid;
+      border-color: rgba(255, 255, 255, 0.15) transparent transparent transparent;
+    }
+
+    .bilo-character.active .bilo-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* تعديلات للغة الإنجليزية */
+    [lang="en"] .bilo-character {
+      right: auto;
+      left: 30px;
+    }
+
+    [lang="en"] .bilo-tooltip {
+      right: auto;
+      left: 0;
+      text-align: left;
+    }
+
+    [lang="en"] .bilo-tooltip::after {
+      right: auto;
+      left: 20px;
+    }
+
+    /* الفوتر - تعديلات لجعل كل العناصر تبدأ من اليمين */
+    .footer {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 50px 5% 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: right;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 أعمدة متساوية */
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: right;
+    }
+    
+    .footer-col {
+      text-align: right;
+      direction: rtl;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .footer-logo img {
+      height: 50px;
+    }
+    
+    .footer-about {
+      font-size: 0.9em;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      text-align: right;
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .footer-social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      font-size: 1.2em;
+    }
+    
+    .footer-social-icon:hover {
+      background: linear-gradient(45deg, #ffc107, #ff9800);
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+      color: #000;
+    }
+    
+    .footer-social-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .footer-social-icon:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .footer-links h3 {
+      font-size: 1.2em;
+      margin-bottom: 25px;
+      color: var(--accent-color);
+      text-align: right;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+      text-align: right;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+      text-align: right;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+      text-align: right;
+    }
+    
+    .footer-links a:hover {
+      color: var(--golden-hover);
+      padding-right: 5px;
+    }
+    
+    /* قسم البحث في الفوتر - تحسينات جديدة */
+    .footer-search {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 25px;
+      width: 100%;
+    }
+    
+    .footer-search-input {
+      display: flex;
+      width: 100%;
+      max-width: 300px;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .footer-search input {
+      padding: 12px 15px;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      width: 100%;
+      transition: all 0.3s;
+      font-family: 'Cairo', sans-serif;
+    }
+    
+    .footer-search input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 10px rgba(43, 104, 255, 0.5);
+      border-color: var(--primary-color);
+    }
+    
+    .footer-search input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .footer-search-btn {
+      padding: 12px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      width: 45px;
+      height: 45px;
+    }
+    
+    .footer-search-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(43, 104, 255, 0.4);
+    }
+    
+    .footer-search-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .footer-search-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* تعديلات اتجاه أيقونة البحث مع تغيير اللغة */
+    [lang="ar"] .footer-search-btn i {
+      transform: scaleX(1);
+    }
+    
+    [lang="en"] .footer-search-btn i {
+      transform: scaleX(-1);
+    }
+    
+    /* تعديلات النصوص مع تغيير اللغة */
+    [lang="ar"] .news-card-title,
+    [lang="ar"] .news-excerpt,
+    [lang="ar"] .news-date,
+    [lang="ar"] .featured-title,
+    [lang="ar"] .featured-excerpt,
+    [lang="ar"] .footer-about,
+    [lang="ar"] .footer-links a {
+      text-align: right;
+    }
+    
+    [lang="en"] .news-card-title,
+    [lang="en"] .news-excerpt,
+    [lang="en"] .news-date,
+    [lang="en"] .featured-title,
+    [lang="en"] .featured-excerpt,
+    [lang="en"] .footer-about,
+    [lang="en"] .footer-links a {
+      text-align: left;
+    }
+    
+    /* الحفاظ على العناوين في المنتصف */
+    .news-title,
+    .news-subtitle,
+    .footer-links h3 {
+      text-align: center;
+    }
+    
+    /* الحفاظ على الفلاتر وزر التحميل في المنتصف */
+    .news-filters,
+    .load-more-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 40px 0;
+      grid-column: 1 / -1; /* يمتد عبر جميع الأعمدة */
+    }
+    
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9em;
+      opacity: 0.7;
+      grid-column: 1 / -1; /* يمتد عبر جميع الأعمدة */
+    }
+    
+    /* تحسينات للهواتف المحمولة */
+    @media (max-width: 1200px) {
+      .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .footer-search {
+        grid-column: span 3;
+        align-items: center;
+      }
+      
+      .footer-search-input {
+        max-width: 100%;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .featured-slider {
+        height: 450px;
+      }
+      
+      .featured-content {
+        padding: 30px;
+      }
+      
+      .featured-title {
+        font-size: 1.8rem;
+      }
+      
+      .featured-excerpt {
+        font-size: 1rem;
+      }
+      
+      .news-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-search {
+        grid-column: span 2;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-bar {
+        flex-wrap: wrap;
+        padding: 10px;
+        justify-content: space-between;
+      }
+      
+      .logo-section {
+        order: 1;
+        flex: 0 0 auto;
+      }
+      
+      .user-actions {
+        order: 2;
+        flex: 0 0 auto;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .hamburger-menu {
+        order: 3;
+        display: flex;
+        margin-left: 0;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu {
+        display: flex;
+      }
+      
+      .search-container {
+        margin-left: 0;
+      }
+      
+      .search-bar {
+        right: 5%;
+        left: auto;
+        width: 90%;
+      }
+      
+      .language-toggle span {
+        display: none;
+      }
+      
+      .news-page {
+        padding: 60px 5% 30px;
+      }
+      
+      .news-title {
+        font-size: 2rem;
+      }
+      
+      .featured-slider {
+        height: 400px;
+      }
+      
+      .featured-content {
+        padding: 20px;
+      }
+      
+      .featured-title {
+        font-size: 1.6rem;
+      }
+      
+      .featured-excerpt {
+        font-size: 0.95rem;
+      }
+      
+      .featured-link {
+        padding: 10px 20px;
+      }
+      
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .news-card {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-search {
+        grid-column: span 1;
+      }
+      
+      .bilo-character {
+        width: 100px;
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .bilo-tooltip {
+        width: 200px;
+        font-size: 0.8em;
+        padding: 10px;
+        right: 0;
+      }
+      
+      [lang="en"] .bilo-character {
+        left: 20px;
+      }
+      
+      /* تكبير أزرار الفلاتر على الموبايل */
+      .filter-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        min-width: 120px;
+      }
+      
+      /* تكبير زر تحميل المزيد على الموبايل */
+      .read-more-btn {
+        padding: 12px 25px;
+        min-width: 200px;
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .nav-bar {
+        padding: 8px 10px;
+      }
+      
+      .logo-section img {
+        height: 35px;
+      }
+      
+      .search-icon {
+        padding: 8px;
+      }
+      
+      .search-bar {
+        width: 250px;
+      }
+      
+      .news-title {
+        font-size: 1.8rem;
+      }
+      
+      .news-subtitle {
+        font-size: 0.95rem;
+      }
+      
+      .featured-slider {
+        height: 350px;
+      }
+      
+      .featured-title {
+        font-size: 1.4rem;
+      }
+      
+      .featured-excerpt {
+        font-size: 0.9rem;
+      }
+      
+      .featured-nav {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .filter-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+        min-width: 110px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .bilo-character {
+        width: 80px;
+        bottom: 15px;
+        right: 15px;
+      }
+      
+      .bilo-tooltip {
+        width: 180px;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .news-title {
+        font-size: 1.6rem;
+      }
+      
+      .featured-slider {
+        height: 300px;
+      }
+      
+      .featured-title {
+        font-size: 1.3rem;
+      }
+      
+      .featured-excerpt {
+        display: none;
+      }
+      
+      .search-bar {
+        width: 220px;
+      }
+      
+      /* تكبير أزرار الفلاتر على الشاشات الصغيرة جدًا */
+      .filter-btn {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+        min-width: 100px;
+      }
+      
+      /* تكبير زر تحميل المزيد على الشاشات الصغيرة جدًا */
+      .read-more-btn {
+        padding: 12px 20px;
+        min-width: 180px;
+        font-size: 0.95rem;
+      }
+    }
+    
+    /* تعديلات الفوتر للغة الإنجليزية */
+    [lang="en"] .footer {
+      text-align: left;
+      direction: ltr;
+    }
+    
+    [lang="en"] .footer-content {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-col {
+      text-align: left;
+      direction: ltr;
+    }
+    
+    [lang="en"] .footer-logo {
+      justify-content: flex-start;
+    }
+    
+    [lang="en"] .footer-about {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-social {
+      justify-content: flex-start;
+    }
+    
+    [lang="en"] .footer-links h3 {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links ul {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links li {
+      text-align: left;
+    }
+    
+    [lang="en"] .footer-links a:hover {
+      padding-right: 0;
+      padding-left: 5px;
+    }
+    
+    /* تعديلات النافبار للهاتف */
+    @media (max-width: 768px) {
+      .nav-bar {
+        flex-wrap: nowrap;
+        padding: 10px;
+      }
+      
+      .logo-section {
+        order: 1;
+        flex: 0 0 auto;
+      }
+      
+      .user-actions {
+        order: 2;
+        flex: 0 0 auto;
+        margin-left: auto;
+        margin-right: 10px;
+      }
+      
+      .hamburger-menu {
+        order: 3;
+        margin-left: 0;
+      }
+      
+      .search-container {
+        margin-left: 0;
+      }
+      
+      .search-icon, .language-toggle {
+        padding: 8px 10px;
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="overlay"></div>
+<div class="particles" id="particles"></div>
+
+<!-- شخصية بيلو التفاعلية - النسخة المحسنة -->
+<div class="bilo-character" id="bilo-character">
+  <div class="bilo-tooltip" id="bilo-tooltip">
+    مرحباً! أنا بيلو، صديق رحلتك في مشروع YLY. أنا هنا لمساعدتك في تصفح آخر الأخبار!
+  </div>
+  <img src="./assets/home/bilo-taier.png" alt="بيلو المساعد الشخصي" id="bilo-image">
+</div>
+
+<!-- شريط التنقل الموحد -->
+<div class="nav-bar">
+  <div class="logo-section">
+    <img src="./assets/home/minestry-sports.png" alt="وزارة الشباب والرياضة">
+    <img src="./assets/home/logo-yly-minsttry.png" alt="YLY">
+  </div>
+  
+  <div class="nav-links" id="nav-links">
+    <a href="index.html" class="nav-link" data-ar="الصفحة الرئيسية" data-en="Home"><i data-feather="home"></i> الصفحة الرئيسية</a>
+    <a href="news.html" class="nav-link active" data-ar="الأخبار" data-en="News"><i data-feather="file-text"></i> الأخبار</a>
+    <a href="events.html" class="nav-link" data-ar="الفعاليات" data-en="Events"><i data-feather="calendar"></i> الفعاليات</a>
+    <a href="sponsors.html" class="nav-link" data-ar="الداعمون " data-en="Sponsors"><i data-feather="users"></i>الداعمون</a>
+    <a href="about.html" class="nav-link" data-ar="معلومات عنا" data-en="About"><i data-feather="info"></i> معلومات عنا</a>
+    <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"><i data-feather="mail"></i> اتصل بنا</a>
+  </div>
+  
+  <div class="user-actions">
+    <div class="language-toggle" onclick="toggleLanguage()">
+      <i data-feather="globe"></i>
+      <span>العربية / English</span>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-icon" id="search-icon">
+        <i data-feather="search"></i>
+      </div>
+      <div class="search-bar" id="search-bar">
+        <input type="text" placeholder="ابحث عن أخبار، أحداث، متطوعين..." data-ar-placeholder="ابحث عن أخبار، أحداث، متطوعين..." data-en-placeholder="Search for news, events, volunteers...">
+        <button class="search-btn" id="search-btn" data-ar="بحث" data-en="Search">بحث</button>
+        <div class="search-results" style="display: none;">
+          <!-- سيتم إضافة نتائج البحث هنا ديناميكيًا -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="hamburger-menu" id="hamburger-menu">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- قائمة الموبايل المنسدلة -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="nav-link" data-ar="الصفحة الرئيسية" data-en="Home"><i data-feather="home"></i> الصفحة الرئيسية</a>
+  <a href="news.html" class="nav-link active" data-ar="الأخبار" data-en="News"><i data-feather="file-text"></i> الأخبار</a>
+  <a href="events.html" class="nav-link" data-ar="الفعاليات" data-en="Events"><i data-feather="calendar"></i> الفعاليات</a>
+  <a href="sponsors.html" class="nav-link" data-ar=" الداعمون" data-en="Sponsors"><i data-feather="users"></i> الداعمون</a>
+  <a href="about.html" class="nav-link" data-ar="معلومات عنا" data-en="About"><i data-feather="info"></i> معلومات عنا</a>
+  <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"><i data-feather="mail"></i> اتصل بنا</a>
+</div>
+
+<!-- صفحة الأخبار الرئيسية -->
+<div class="news-page">
+  <!-- أخبار مميزة - سلايدر -->
+  <div ID=star-news class="featured-news">
+    <div class="featured-slider">
+      <div class="featured-slide active" style="background-image: url('./assets/news/المنتدي.webp')">
+        <div class="featured-content">
+          <span class="featured-badge" data-ar="مميز" data-en="Featured">مميز</span>
+          <h2 class="featured-title" data-ar="انطلاق فعاليات المنتدى الشبابي السنوي لمتطوعي YLY" data-en="Launch of the Annual Youth Forum for YLY Volunteers">انطلاق فعاليات المنتدى الشبابي السنوي لمتطوعي YLY</h2>
+          <p class="featured-excerpt" data-ar="انطلقت اليوم فعاليات المنتدى الشبابي السنوي لمتطوعي YLY بحضور وزير الشباب والرياضة الدكتور أشرف صبحي، بمشاركة أكثر من 500 شاب وفتاة من مختلف محافظات مصر." data-en="Today, the activities of the Annual Youth Forum for YLY Volunteers were launched in the presence of the Minister of Youth and Sports, Dr. Ashraf Sobhy, with the participation of more than 500 young men and women from various governorates of Egypt.">
+            انطلقت اليوم فعاليات المنتدى الشبابي السنوي لمتطوعي YLY بحضور وزير الشباب والرياضة الدكتور أشرف صبحي، بمشاركة أكثر من 500 شاب وفتاة من مختلف محافظات مصر.
+          </p>
+          <a href="news-details.html" class="featured-link" data-ar="اقرأ المزيد" data-en="Read More">اقرأ المزيد</a>
+        </div>
+      </div>
+      
+      <div class="featured-slide" style="background-image: url('./assets/news/تكريم-الوزير.jpg')">
+        <div class="featured-content">
+          <span class="featured-badge" data-ar="مميز" data-en="Featured">مميز</span>
+          <h2 class="featured-title" data-ar="وزير الشباب والرياضة يكرم المتطوعين المتميزين في مشروع YLY" data-en="Minister of Youth and Sports Honors Outstanding Volunteers in YLY Project">وزير الشباب والرياضة يكرم المتطوعين المتميزين في مشروع YLY</h2>
+          <p class="featured-excerpt" data-ar="كرم الدكتور أشرف صبحي وزير الشباب والرياضة، المتطوعين المتميزين في مشروع YLY لعام 2025، وذلك خلال حفل كبير أقيم بمركز التعليم المدني بالجزيرة." data-en="Dr. Ashraf Sobhy, Minister of Youth and Sports, honored the outstanding volunteers in the YLY project for the year 2025, during a grand ceremony held at the Civil Education Center in Gezira.">
+            كرم الدكتور أشرف صبحي وزير الشباب والرياضة، المتطوعين المتميزين في مشروع YLY لعام 2025، وذلك خلال حفل كبير أقيم بمركز التعليم المدني بالجزيرة.
+          </p>
+          <a href="news-details.html" class="featured-link" data-ar="اقرأ المزيد" data-en="Read More">اقرأ المزيد</a>
+        </div>
+      </div>
+      
+      <div class="featured-slide" style="background-image: url('./assets/news/اطلاق-برنامج.png')">
+        <div class="featured-content">
+          <span class="featured-badge" data-ar="جديد" data-en="New">جديد</span>
+          <h2 class="featured-title" data-ar="YLY تطلق برنامج "قادة المستقبل" لتأهيل الشباب لسوق العمل" data-en="YLY Launches 'Future Leaders' Program to Qualify Youth for the Labor Market">YLY تطلق برنامج "قادة المستقبل" لتأهيل الشباب لسوق العمل</h2>
+          <p class="featured-excerpt" data-ar="أطلقت وزارة الشباب والرياضة من خلال مشروع YLY برنامج "قادة المستقبل" الذي يهدف إلى تأهيل الشباب وتنمية مهاراتهم القيادية والإدارية لسوق العمل." data-en="The Ministry of Youth and Sports, through the YLY project, launched the 'Future Leaders' program, which aims to qualify youth and develop their leadership and administrative skills for the labor market.">
+            أطلقت وزارة الشباب والرياضة من خلال مشروع YLY برنامج "قادة المستقبل" الذي يهدف إلى تأهيل الشباب وتنمية مهاراتهم القيادية والإدارية لسوق العمل.
+          </p>
+          <a href="news-details.html" class="featured-link" data-ar="اقرأ المزيد" data-en="Read More">اقرأ المزيد</a>
+        </div>
+      </div>
+      
+      <div class="featured-prev featured-nav" onclick="changeFeaturedSlide(-1)"><i data-feather="chevron-right"></i></div>
+      <div class="featured-next featured-nav" onclick="changeFeaturedSlide(1)"><i data-feather="chevron-left"></i></div>
+    </div>
+  </div>
+  
+  <!-- عنوان الصفحة -->
+  <div ID=news class="news-header">
+    <h1 class="news-title" data-ar="آخر الأخبار والفعاليات" data-en="Latest News & Events">آخر الأخبار والفعاليات</h1>
+    <p class="news-subtitle" data-ar="تابع آخر أخبار وأنشطة مشروع YLY وكن أول من يعرف عن الفعاليات القادمة والفرص التطوعية الجديدة" data-en="Follow the latest news and activities of the YLY project and be the first to know about upcoming events and new volunteer opportunities">
+      تابع آخر أخبار وأنشطة مشروع YLY وكن أول من يعرف عن الفعاليات القادمة والفرص التطوعية الجديدة
+    </p>
+  </div>
+  
+  <!-- تصفية الأخبار -->
+  <div class="news-filters">
+    <button class="filter-btn active" data-filter="all" data-ar="الكل" data-en="All">الكل</button>
+    <button class="filter-btn" data-filter="events" data-ar="الفعاليات" data-en="Events">الفعاليات</button>
+    <button class="filter-btn" data-filter="announcements" data-ar="إعلانات" data-en="Announcements">إعلانات</button>
+    <button class="filter-btn" data-filter="success-stories" data-ar="قصص نجاح" data-en="Success Stories">قصص نجاح</button>
+    <button class="filter-btn" data-filter="volunteering" data-ar="فرص تطوعية" data-en="Volunteering">فرص تطوعية</button>
+  </div>
+  
+  <!-- شبكة الأخبار -->
+  <div class="news-grid">
+    <!-- خبر 1 -->
+    <div class="news-card" data-category="events">
+      <div class="news-image-container">
+        <img src="./assets/home/معسكر الشباب.jpg" alt="معسكر القيادة الشبابية" class="news-image">
+        <span class="news-badge" data-ar="فعالية" data-en="Event">فعالية</span>
+      </div>
+      <div class="news-content">
+        <div class="news-date"><i data-feather="calendar"></i> <span data-ar="15 يونيو 2025" data-en="June 15, 2025">15 يونيو 2025</span></div>
+        <h3 class="news-card-title" data-ar="معسكر القيادة الشبابية في محافظة البحر الأحمر" data-en="Youth Leadership Camp in Red Sea Governorate">معسكر القيادة الشبابية في محافظة البحر الأحمر</h3>
+        <p class="news-excerpt" data-ar="ينظم مشروع YLY معسكر القيادة الشبابية في محافظة البحر الأحمر خلال الفترة من 15 إلى 20 يونيو 2025، بمشاركة 150 شاب وفتاة من مختلف المحافظات." data-en="The YLY project organizes the Youth Leadership Camp in the Red Sea Governorate from June 15 to 20, 2025, with the participation of 150 young men and women from various governorates.">
+          ينظم مشروع YLY معسكر القيادة الشبابية في محافظة البحر الأحمر خلال الفترة من 15 إلى 20 يونيو 2025، بمشاركة 150 شاب وفتاة من مختلف المحافظات.
+        </p>
+        <a href="news-details.html" class="read-more-btn" data-ar="اقرأ المزيد" data-en="Read More">اقرأ المزيد</a>
+      </div>
+    </div>
+    
+    <!-- خبر 2 -->
+    <div class="news-card" data-category="announcements">
+      <div class="news-image-container">
+        <img src="./assets/news/اعلان-نتائج.jpg" alt="نتائج التطوع" class="news-image">
+        <span class="news-badge" data-ar="إعلان" data-en="Announcement">إعلان</span>
+      </div>
+      <div class="news-content">
+        <div class="news-date"><i data-feather="calendar"></i> <span data-ar="5 يونيو 2025" data-en="June 5, 2025">5 يونيو 2025</span></div>
+        <h3 class="news-card-title" data-ar="إعلان نتائج المتطوعين المقبولين في الدفعة الجديدة" data-en="Announcement of Accepted Volunteers in the New Batch">إعلان نتائج المتطوعين المقبولين في الدفعة الجديدة</h3>
+        <p class="news-excerpt" data-ar="تعلن وزارة الشباب والرياضة عن نتائج المتطوعين المقبولين في الدفعة الجديدة من مشروع YLY للعام 2025، حيث بلغ عدد المتقدمين أكثر من 10 آلاف شاب وفتاة." data-en="The Ministry of Youth and Sports announces the results of the accepted volunteers in the new batch of the YLY project for the year 2025, with more than 10,000 young men and women applying.">
+          تعلن وزارة الشباب والرياضة عن نتائج المتطوعين المقبولين في الدفعة الجديدة من مشروع YLY للعام 2025، حيث بلغ عدد المتقدمين أكثر من 10 آلاف شاب وفتاة.
+        </p>
+        <a href="news-details.html" class="read-more-btn" data-ar="اقرأ المزيد" data-en="Read More">اقرأ المزيد</a>
+      </div>
+    </div>
+    
+    <!-- خبر 3 -->
+    <div class="news-card" data-category="success-stories">
+      <div class="news-image-container">
+        <img src="./assets/news/قصة-نجاح.jpg" alt="قصة نجاح" class="news-image">
+        <span class="news-badge" data-ar="قصة نجاح" data-en="Success Story">قصة نجاح</span>
+      </div>
+      <div class="news-content">
+        <div class="news-date"><i data-feather="calendar"></i> <span data-ar="28 مايو 2025" data-en="May 28, 2025">28 مايو 2025</span></div>
+        <h3 class="news-card-title" data-ar="من متطوعة إلى ترتيب الجمهورية.. قصة نجاح مروج مصطفي" data-en="From Volunteer to Project Manager.. The Success Story of Ahmed Mohamed">من متطوعة إلى ترتيب الجمهورية.. قصة نجاح مروج مصطفي</h3>
+        <p class="news-excerpt" data-ar="يشارك المتطوع مروج مصطفي تجربته الملهمة مع مشروع YLY وكيف ساعده في تطوير مهاراته القيادية حتى أصبح مديرًا لأحد المشاريع الكبرى في القطاع الخاص." data-en="Volunteer Ahmed Mohamed shares his inspiring experience with the YLY project and how it helped him develop his leadership skills until he became the manager of a major project in the private sector.">
+          يشارك المتطوع أحمد محمد تجربته الملهمة مع مشروع YLY وكيف ساعده في تطوير مهاراته القيادية حتى أصبح مديرًا لأحد المشاريع الكبرى في القطاع الخاص.
+        </p>
+        <a href="news-details.html" class="read-more-btn" data-ar="اقرأ المزيد" data-en="Read More">اقرأ المزيد</a>
+      </div>
+    </div>
+    
+    <!-- خبر 4 -->
+    <div class="news-card" data-category="volunteering">
+      <div class="news-image-container">
+        <img src="./assets/news/باب-التطوع.jpg" alt="فرص تطوعية" class="news-image">
+        <span class="news-badge" data-ar="فرصة تطوعية" data-en="Volunteering">فرصة تطوعية</span>
+      </div>
+      <div class="news-content">
+        <div class="news-date"><i data-feather="calendar"></i> <span data-ar="20 مايو 2025" data-en="May 20, 2025">20 مايو 2025</span></div>
+        <h3 class="news-card-title" data-ar="فرص تطوعية جديدة في فعاليات صيف 2025" data-en="New Volunteer Opportunities in Summer 2025 Events">فرص تطوعية جديدة في فعاليات صيف 2025</h3>
+        <p class="news-excerpt" data-ar="تعلن وزارة الشباب والرياضة عن فتح باب التطوع للشباب للمشاركة في تنظيم فعاليات صيف 2025 التي ستقام في مختلف المحافظات المصرية." data-en="The Ministry of Youth and Sports announces the opening of volunteer applications for youth to participate in organizing the Summer 2025 events that will be held in various Egyptian governorates.">
+          تعلن وزارة الشباب والرياضة عن فتح باب التطوع للشباب للمشاركة في تنظيم فعاليات صيف 2025 التي ستقام في مختلف المحافظات المصرية.
+        </p>
+        <a href="news-details.html" class="read-more-btn" data-ar="اقرأ المزيد" data-en="Read More">اقرأ المزيد</a>
+      </div>
+    </div>
+    
+    <!-- خبر 5 -->
+    <div class="news-card" data-category="events">
+      <div class="news-image-container">
+        <img src="./assets/home/ماراثون.jpeg" alt="ماراثون الشباب" class="news-image">
+        <span class="news-badge" data-ar="فعالية" data-en="Event">فعالية</span>
+      </div>
+      <div class="news-content">
+        <div class="news-date"><i data-feather="calendar"></i> <span data-ar="12 مايو 2025" data-en="May 12, 2025">12 مايو 2025</span></div>
+        <h3 class="news-card-title" data-ar="ماراثون الشباب الخامس تحت شعار "شباب يبني المستقبل"" data-en="Fifth Youth Marathon Under the Slogan 'Youth Building the Future'">ماراثون الشباب الخامس تحت شعار "شباب يبني المستقبل"</h3>
+        <p class="news-excerpt" data-ar="تنطلق فعاليات ماراثون الشباب الخامس الذي ينظمه مشروع YLY بالتعاون مع وزارة الشباب والرياضة يوم 12 مايو بمشاركة أكثر من 3000 شاب وفتاة." data-en="The activities of the fifth Youth Marathon organized by the YLY project in cooperation with the Ministry of Youth and Sports will start on May 12 with the participation of more than 3,000 young men and women.">
+          تنطلق فعاليات ماراثون الشباب الخامس الذي ينظمه مشروع YLY بالتعاون مع وزارة الشباب والرياضة يوم 12 مايو بمشاركة أكثر من 3000 شاب وفتاة.
+        </p>
+        <a href="news-details.html" class="read-more-btn" data-ar="اقرأ المزيد" data-en="Read More">اقرأ المزيد</a>
+      </div>
+    </div>
+    
+    <!-- خبر 6 -->
+    <div class="news-card" data-category="announcements">
+      <div class="news-image-container">
+        <img src="./assets/news/ورش-عمل.jpg" alt="ورشة عمل" class="news-image">
+        <span class="news-badge" data-ar="إعلان" data-en="Announcement">إعلان</span>
+      </div>
+      <div class="news-content">
+        <div class="news-date"><i data-feather="calendar"></i> <span data-ar="5 مايو 2025" data-en="May 5, 2025">5 مايو 2025</span></div>
+        <h3 class="news-card-title" data-ar="ورشة عمل "مهارات القيادة الفعالة" للمتطوعين الجدد" data-en="'Effective Leadership Skills' Workshop for New Volunteers">ورشة عمل "مهارات القيادة الفعالة" للمتطوعين الجدد</h3>
+        <p class="news-excerpt" data-ar="ينظم مشروع YLY ورشة عمل "مهارات القيادة الفعالة" للمتطوعين الجدد يوم 5 مايو في مقر الوزارة بالقاهرة، وذلك ضمن خطة التأهيل والتدريب." data-en="The YLY project organizes the 'Effective Leadership Skills' workshop for new volunteers on May 5 at the Ministry's headquarters in Cairo, as part of the qualification and training plan.">
+          ينظم مشروع YLY ورشة عمل "مهارات القيادة الفعالة" للمتطوعين الجدد يوم 5 مايو في مقر الوزارة بالقاهرة، وذلك ضمن خطة التأهيل والتدريب.
+        </p>
+        <a href="news-details.html" class="read-more-btn" data-ar="اقرأ المزيد" data-en="Read More">اقرأ المزيد</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- زر تحميل المزيد -->
+  <div style="text-align: center; margin-top: 40px;">
+    <button class="read-more-btn" id="load-more-btn" data-ar="تحميل المزيد" data-en="Load More">تحميل المزيد</button>
+  </div>
+</div>
+
+<!-- الفوتر -->
+<div class="footer">
+  <div class="footer-content">
+    <!-- القسم الأول: الشعار والوصف والروابط الاجتماعية -->
+    <div class="footer-col">
+      <div class="footer-logo">
+        <img src="./assets/home/minestry-sports.png" alt="وزارة الشباب والرياضة" style="width: 50px;">
+        <img src="./assets/home/logo-yly-minsttry.png" alt="YLY" style="width: 50px;">
+      </div>
+      
+      <p class="footer-about" data-ar="مشروع YLY هو مبادرة شبابية تحت رعاية وزارة الشباب والرياضة تهدف إلى تمكين الشباب وتنمية مهاراتهم من خلال المشاركة في تنظيم الفعاليات والأنشطة المجتمعية." data-en="The YLY project is a youth initiative under the auspices of the Ministry of Youth and Sports that aims to empower youth and develop their skills through participation in organizing community events and activities.">
+        مشروع YLY هو مبادرة شبابية تحت رعاية وزارة الشباب والرياضة تهدف إلى تمكين الشباب وتنمية مهاراتهم من خلال المشاركة في تنظيم الفعاليات والأنشطة المجتمعية.
+      </p>
+      
+      <div class="footer-social">
+        <a href="#" class="footer-social-icon"><i data-feather="facebook"></i></a>
+        <a href="#" class="footer-social-icon"><i data-feather="instagram"></i></a>
+        <a href="#" class="footer-social-icon"><i class="bi bi-tiktok"></i></a>
+        <a href="#" class="footer-social-icon"><i data-feather="linkedin"></i></a>
+      </div>
+    </div>
+    
+    <!-- القسم الثاني: روابط سريعة -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+      <ul class="footer-links">
+        <li><a href="index.html" data-ar="الصفحة الرئيسية" data-en="Home">الصفحة الرئيسية</a></li>
+        <li><a href="news.html" data-ar="الأخبار" data-en="News">الأخبار</a></li>
+        <li><a href="events.html" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+        <li><a href="sponsors.html" data-ar=" الداعمون" data-en="Sponsors">الرعاة الرسميين</a></li>
+        <li><a href="about.html" data-ar="معلومات عنا" data-en="About">معلومات عنا</a></li>
+        <li><a href="contact.html" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
+      </ul>
+    </div>
+    
+    <!-- القسم الثالث: روابط الصفحة الرئيسية -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="صفحة الأخبار" data-en="NEWS PAGE">صفحة الأخبار</h3>
+      <ul class="footer-links">
+        <li><a href="#star-news" data-ar="ابرز الأخبار" data-en="Most prominent news">أبرز الأخبار </a></li>
+        <li><a href="#news" data-ar="كل الأخبرا" data-en="All news">جميع الأخبار</a></li>
+      </ul>
+    </div>
+    
+    <!-- القسم الرابع: البحث في الموقع - النسخة المحسنة -->
+    <div class="footer-col">
+      <h3 class="footer-links-title" data-ar="ابحث في الموقع" data-en="Search Site">ابحث في الموقع</h3>
+      <div class="footer-search">
+        <div class="footer-search-input">
+          <input type="text" placeholder="ابحث في الموقع..." data-ar-placeholder="ابحث في الموقع..." data-en-placeholder="Search the site...">
+          <button class="footer-search-btn">
+            <i data-feather="search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- الخط الفاصل -->
+    <div class="footer-divider"></div>
+    
+    <!-- حقوق النشر -->
+    <div class="footer-copyright">
+      <span data-ar="&copy; 2025 جميع الحقوق محفوظة لمشروع YLY - وزارة الشباب والرياضة" data-en="&copy; 2025 All Rights Reserved to YLY Project - Ministry of Youth and Sports">&copy; 2025 جميع الحقوق محفوظة لمشروع YLY - وزارة الشباب والرياضة</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // تهيئة الصفحة
+  document.addEventListener('DOMContentLoaded', function() {
+    // إنشاء الجزيئات المتحركة
+    createParticles();
+    
+    // تشغيل سلايدر الأخبار المميزة
+    initFeaturedSlider();
+    
+    // تفعيل البحث
+    setupSearch();
+    
+    // التحكم في القائمة المنسدلة على الموبايل
+    setupMobileMenu();
+    
+    // تهيئة شخصية بيلو التفاعلية
+    setupBiloCharacter();
+    
+    // تفعيل تصفية الأخبار
+    setupNewsFilter();
+    
+    // تفعيل زر تحميل المزيد
+    setupLoadMore();
+    
+    // تحميل أيقونات Feather
+    feather.replace();
+  });
+
+  // تبديل اللغة مع ترجمة كاملة للمحتوى
+  function toggleLanguage() {
+    const currentLang = document.documentElement.lang;
+    const elementsToTranslate = document.querySelectorAll('[data-ar], [data-en]');
+    
+    if (currentLang === 'ar') {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+      document.querySelector('.language-toggle span').textContent = 'English / العربية';
+      document.title = 'News | YLY';
+      
+      // ترجمة جميع العناصر
+      elementsToTranslate.forEach(el => {
+        if (el.dataset.en) {
+          el.textContent = el.dataset.en;
+        }
+        if (el.dataset.enPlaceholder) {
+          el.placeholder = el.dataset.enPlaceholder;
+        }
+      });
+      
+      // تحديث النصوص الديناميكية
+      document.querySelector('.bilo-tooltip').textContent = 'Hello! I am Bilo, your companion on the YLY project journey. I am here to help you browse the latest news!';
+    } else {
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      document.querySelector('.language-toggle span').textContent = 'العربية / English';
+      document.title = 'الأخبار | YLY';
+      
+      // إعادة النصوص إلى العربية
+      elementsToTranslate.forEach(el => {
+        if (el.dataset.ar) {
+          el.textContent = el.dataset.ar;
+        }
+        if (el.dataset.arPlaceholder) {
+          el.placeholder = el.dataset.arPlaceholder;
+        }
+      });
+      
+      // تحديث النصوص الديناميكية
+      document.querySelector('.bilo-tooltip').textContent = 'مرحباً! أنا بيلو، صديق رحلتك في مشروع YLY. أنا هنا لمساعدتك في تصفح آخر الأخبار!';
+    }
+    
+    // تحديث اتجاه أيقونات Feather
+    feather.replace();
+  }
+
+  // إنشاء الجزيئات المتحركة
+  function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const count = Math.floor(window.innerWidth / 20);
+    
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      const size = Math.random() * 5 + 2;
+      const posX = Math.random() * window.innerWidth;
+      const duration = Math.random() * 15 + 10;
+      const delay = Math.random() * 10;
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${posX}px`;
+      particle.style.bottom = '0';
+      particle.style.animationDuration = `${duration}s`;
+      particle.style.animationDelay = `${delay}s`;
+      
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  // سلايدر الأخبار المميزة
+  function initFeaturedSlider() {
+    const slides = document.querySelectorAll('.featured-slide');
+    let currentSlide = 0;
+    
+    function showSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (n + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    
+    // التبديل التلقائي كل 8 ثواني
+    setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 8000);
+  }
+  
+  // تغيير شريحة الأخبار المميزة يدوياً
+  function changeFeaturedSlide(direction) {
+    const slides = document.querySelectorAll('.featured-slide');
+    let currentSlide = 0;
+    
+    slides.forEach((slide, index) => {
+      if (slide.classList.contains('active')) {
+        currentSlide = index;
+      }
+    });
+    
+    slides[currentSlide].classList.remove('active');
+    const newSlide = (currentSlide + direction + slides.length) % slides.length;
+    slides[newSlide].classList.add('active');
+  }
+
+  // تفعيل البحث
+  function setupSearch() {
+    const searchIcon = document.getElementById('search-icon');
+    const searchBar = document.getElementById('search-bar');
+    const searchBtn = document.getElementById('search-btn');
+    
+    searchIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchBar.classList.toggle('active');
+      
+      if (searchBar.classList.contains('active')) {
+        searchBar.querySelector('input').focus();
+      }
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container') && !e.target.closest('.search-bar')) {
+        searchBar.classList.remove('active');
+      }
+    });
+    
+    searchBar.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+    
+    // تفعيل زر البحث
+    searchBtn.addEventListener('click', function() {
+      const searchTerm = document.querySelector('.search-bar input').value;
+      if (searchTerm.trim() !== '') {
+        alert('سيتم البحث عن: ' + searchTerm);
+        // هنا يمكنك إضافة منطق البحث الفعلي
+      }
+    });
+    
+    // تفعيل البحث عند الضغط على Enter
+    document.querySelector('.search-bar input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const searchTerm = this.value;
+        if (searchTerm.trim() !== '') {
+          alert('سيتم البحث عن: ' + searchTerm);
+          // هنا يمكنك إضافة منطق البحث الفعلي
+        }
+      }
+    });
+  }
+  
+  // إعداد القائمة المنسدلة للهاتف
+  function setupMobileMenu() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+    
+    document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-bar') && mobileMenu.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+  
+  // إعداد شخصية بيلو التفاعلية - النسخة المحسنة
+  function setupBiloCharacter() {
+    const biloCharacter = document.getElementById('bilo-character');
+    const biloTooltip = document.getElementById('bilo-tooltip');
+    const biloImage = document.getElementById('bilo-image');
+    
+    // رسالة ترحيبية عند تحميل الصفحة مع تأثيرات
+    setTimeout(() => {
+      biloTooltip.textContent = 'مرحباً بك في منصة متطوعي وزارة الشباب والرياضة! أنا بيلو، صديق رحلتك في مشروع YLY.';
+      biloCharacter.classList.add('active');
+      biloCharacter.classList.add('bilo-welcoming');
+      
+      setTimeout(() => {
+        biloCharacter.classList.remove('active');
+        biloCharacter.classList.remove('bilo-welcoming');
+      }, 10000);
+    }, 1500);
+    
+    // إظهار الرسالة عند النقر على بيلو
+    biloCharacter.addEventListener('click', function() {
+      biloCharacter.classList.add('active');
+      biloCharacter.classList.add('bilo-dancing');
+      
+      setTimeout(() => {
+        biloCharacter.classList.remove('active');
+        biloCharacter.classList.remove('bilo-dancing');
+      }, 10000);
+    });
+    
+    // تأثير اهتزاز عند المرور بالفأرة
+    biloCharacter.addEventListener('mouseenter', function() {
+      biloCharacter.classList.add('bilo-welcoming');
+    });
+    
+    biloCharacter.addEventListener('mouseleave', function() {
+      biloCharacter.classList.remove('bilo-welcoming');
+    });
+  }
+  
+  // تفعيل تصفية الأخبار
+  function setupNewsFilter() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // إزالة التنشيط من جميع الأزرار
+        filterBtns.forEach(b => b.classList.remove('active'));
+        
+        // تفعيل الزر المحدد
+        this.classList.add('active');
+        
+        // تصفية الأخبار حسب الفئة
+        const filter = this.dataset.filter;
+        const newsCards = document.querySelectorAll('.news-card');
+        
+        newsCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+  
+  // تفعيل زر تحميل المزيد (وهمي في هذا المثال)
+  function setupLoadMore() {
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    
+    loadMoreBtn.addEventListener('click', function() {
+      // في الواقع، هنا سيتم جلب المزيد من الأخبار من الخادم
+      this.textContent = 'جاري التحميل...';
+      this.disabled = true;
+      
+      // محاكاة جلب البيانات بعد تأخير
+      setTimeout(() => {
+        // يمكنك هنا إضافة المزيد من الأخبار ديناميكياً
+        alert('سيتم تحميل المزيد من الأخبار في التطبيق الحقيقي');
+        this.textContent = this.getAttribute('data-ar');
+        this.disabled = false;
+      }, 1500);
+    });
+  }
+</script>
+</body>
+</html>
