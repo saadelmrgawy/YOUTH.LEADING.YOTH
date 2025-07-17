@@ -24,8 +24,6 @@
       --card-bg: rgba(255, 255, 255, 0.08);
       --mobile-breakpoint: 768px;
       --tablet-breakpoint: 992px;
-      
-      /* New color variables for sponsor categories */
       --gold-color: #ffd700;
       --gold-hover: #ffc107;
       --silver-color: #c0c0c0;
@@ -43,7 +41,7 @@
     body {
       margin: 0;
       font-family: 'Cairo', sans-serif;
-      background: url('./assets/home/bg-space.jpg.png') no-repeat center center fixed;
+      background: url('./assets/home/bg-space.png') no-repeat center center fixed;
       background-size: cover;
       color: var(--text-color);
       overflow-x: hidden;
@@ -1460,18 +1458,18 @@
   </div>
   
   <div class="nav-links" id="nav-links">
-    <a href="index.html" class="nav-link" data-ar="الصفحة الرئيسية" data-en="Home"><i data-feather="home"></i> الصفحة الرئيسية</a>
-    <a href="news.html" class="nav-link" data-ar="الأخبار" data-en="News"><i data-feather="file-text"></i> الأخبار</a>
-    <a href="events.html" class="nav-link" data-ar="الفعاليات" data-en="Events"><i data-feather="calendar"></i> الفعاليات</a>
-    <a href="sponsors.html" class="nav-link active" data-ar=" الداعمون" data-en="Sponsors"><i data-feather="users"></i> الداعمون</a>
-    <a href="about.html" class="nav-link" data-ar="معلومات عنا" data-en="About"><i data-feather="info"></i> معلومات عنا</a>
-    <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"><i data-feather="mail"></i> اتصل بنا</a>
+    <a href="index.html" class="nav-link" data-ar="الصفحة الرئيسية" data-en="Home"> الصفحة الرئيسية</a>
+    <a href="news.html" class="nav-link" data-ar="الأخبار" data-en="News"> الأخبار</a>
+    <a href="events.html" class="nav-link" data-ar="الفعاليات" data-en="Events"> الفعاليات</a>
+    <a href="sponsors.html" class="nav-link active" data-ar=" الداعمون" data-en="Sponsors"> الداعمون</a>
+    <a href="about.html" class="nav-link" data-ar="معلومات عنا" data-en="About"> معلومات عنا</a>
+    <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"> اتصل بنا</a>
   </div>
   
   <div class="user-actions">
     <div class="language-toggle" onclick="toggleLanguage()">
       <i data-feather="globe"></i>
-      <span>العربية / English</span>
+      <span></span>
     </div>
     
     <div class="search-container">
@@ -1527,7 +1525,7 @@
   <div class="sponsors-grid" id="sponsors-grid">
     <!-- الراعي 1 -->
     <div class="sponsor-card" data-category="gold">
-      <img src="./assets/sponsors/coca.cola.png" alt="كوكاكولا" class="sponsor-logo">
+      <img src="./assets/home/bilo.png" alt="كوكاكولا" class="sponsor-logo">
       <h3 class="sponsor-name">كوكاكولا</h3>
       <span class="sponsor-type" data-ar="الراعي الذهبي" data-en="Gold Sponsor">الراعي الذهبي</span>
       <p class="sponsor-desc" data-ar="شركة كوكاكولا تدعم مشروع YLY من خلال توفير المشروبات في الفعاليات والأنشطة المختلفة." data-en="Coca-Cola supports the YLY project by providing beverages at various events and activities.">
@@ -1537,7 +1535,7 @@
     
     <!-- الراعي 2 -->
     <div class="sponsor-card" data-category="gold">
-      <img src="./assets/sponsors/pepsi.png" alt="بيبسي" class="sponsor-logo">
+      <img src="./assets/home/bilo.png" alt="بيبسي" class="sponsor-logo">
       <h3 class="sponsor-name">بيبسي</h3>
       <span class="sponsor-type" data-ar="الراعي الذهبي" data-en="Gold Sponsor">الراعي الذهبي</span>
       <p class="sponsor-desc" data-ar="شركة بيبسي تشارك في دعم الفعاليات الرياضية ضمن مشروع YLY من خلال توفير المشروبات والهدايا." data-en="Pepsi participates in supporting sports events within the YLY project by providing beverages and gifts.">
@@ -1547,7 +1545,7 @@
     
     <!-- الراعي 3 -->
     <div class="sponsor-card" data-category="silver">
-      <img src="./assets/sponsors/mac.png" alt="ماكدونالدز" class="sponsor-logo">
+      <img src="./assets/home/bilo.png" alt="ماكدونالدز" class="sponsor-logo">
       <h3 class="sponsor-name">ماكدونالدز</h3>
       <span class="sponsor-type" data-ar="الراعي الفضي" data-en="Silver Sponsor">الراعي الفضي</span>
       <p class="sponsor-desc" data-ar="ماكدونالدز تدعم بعض الفعاليات الخاصة بمشروع YLY من خلال توفير وجبات للمتطوعين." data-en="McDonald's supports some YLY project events by providing meals for volunteers.">
@@ -1557,7 +1555,7 @@
     
     <!-- الراعي 4 -->
     <div class="sponsor-card" data-category="silver">
-      <img src="./assets/sponsors/stc.png" alt="STC" class="sponsor-logo">
+      <img src="./assets/home/bilo.png" alt="STC" class="sponsor-logo">
       <h3 class="sponsor-name">STC</h3>
       <span class="sponsor-type" data-ar="الراعي الفضي" data-en="Silver Sponsor">الراعي الفضي</span>
       <p class="sponsor-desc" data-ar="شركة STC تقدم الدعم التقني والاتصالي لبعض أنشطة مشروع YLY." data-en="STC provides technical and communication support for some YLY project activities.">
@@ -1567,7 +1565,7 @@
     
     <!-- الراعي 5 -->
     <div class="sponsor-card" data-category="bronze">
-      <img src="./assets/sponsors/mbc.png" alt="MBC" class="sponsor-logo">
+      <img src="./assets/home/bilo.png" alt="MBC" class="sponsor-logo">
       <h3 class="sponsor-name">MBC</h3>
       <span class="sponsor-type" data-ar="الراعي البرونزي" data-en="Bronze Sponsor">الراعي البرونزي</span>
       <p class="sponsor-desc" data-ar="قناة MBC هي الشريك الإعلامي الرسمي لمشروع YLY، حيث تغطي الفعاليات والأنشطة على قنواتها." data-en="MBC channel is the official media partner of the YLY project, covering events and activities on its channels.">
@@ -1577,7 +1575,7 @@
     
     <!-- الراعي 6 -->
     <div class="sponsor-card" data-category="bronze">
-      <img src="./assets/sponsors/dmc.png" alt="DMC" class="sponsor-logo">
+      <img src="./assets/home/bilo.png" alt="DMC" class="sponsor-logo">
       <h3 class="sponsor-name">DMC</h3>
       <span class="sponsor-type" data-ar="الراعي البرونزي" data-en="Bronze Sponsor">الراعي البرونزي</span>
       <p class="sponsor-desc" data-ar="قناة DMC تقدم الدعم الإعلامي لمشروع YLY من خلال تغطية الفعاليات وإجراء المقابلات مع القائمين على المشروع." data-en="DMC channel provides media support for the YLY project by covering events and conducting interviews with project officials.">
@@ -1587,7 +1585,7 @@
 
         <!-- الراعي 7 -->
 <div class="sponsor-card" data-category="media">
-  <img src="./assets/sponsors/rotana.png" alt="روتانا" class="sponsor-logo">
+  <img src="./assets/home/bilo.png" alt="روتانا" class="sponsor-logo">
   <h3 class="sponsor-name" data-ar="روتانا" data-en="Rotana Media">روتانا</h3>
   <span class="sponsor-type" data-ar="الراعي الإعلامي" data-en="Media Sponsor">الراعي الإعلامي</span>
   <p class="sponsor-desc" data-ar="مجموعة روتانا الإعلامية تقدم الدعم الإعلامي لمشروع YLY عبر قنواتها المختلفة." data-en="Rotana Media Group provides media support for YLY project through its various channels.">
@@ -1597,7 +1595,7 @@
 
         <!-- الراعي 8 -->
 <div class="sponsor-card" data-category="media">
-  <img src="./assets/sponsors/cbc.png" alt="سي-بي-سي" class="sponsor-logo">
+  <img src="./assets/home/bilo.png" alt="سي-بي-سي" class="sponsor-logo">
   <h3 class="sponsor-name" data-ar="سي-بي-سي" data-en="CBC Network">سي-بي-سي</h3>
   <span class="sponsor-type" data-ar="الراعي الإعلامي" data-en="Media Sponsor">الراعي الإعلامي</span>
   <p class="sponsor-desc" data-ar="قناة سي-بي-سي تقدم تغطية إعلامية واسعة لفعاليات وأنشطة مشروع YLY." data-en="CBC network provides extensive media coverage for YLY project events and activities.">
@@ -1621,21 +1619,21 @@
     <div class="partners-grid">
       <!-- الشريك 1 -->
       <div class="partner-card">
-        <img src="./assets/sponsors/egy bank.png" alt="بنك مصر" class="partner-logo">
+        <img src="./assets/home/bilo.png" alt="بنك مصر" class="partner-logo">
         <h3 class="partner-name">بنك مصر</h3>
         <p class="partner-role" data-ar="الشريك المالي" data-en="Financial Partner">الشريك المالي</p>
       </div>
       
       <!-- الشريك 2 -->
       <div class="partner-card">
-        <img src="./assets/sponsors/ibm.png" alt="IBM" class="partner-logo">
+        <img src="./assets/home/bilo.png" alt="IBM" class="partner-logo">
         <h3 class="partner-name">IBM</h3>
         <p class="partner-role" data-ar="الشريك التقني" data-en="Technical Partner">الشريك التقني</p>
       </div>
       
       <!-- الشريك 3 -->
       <div class="partner-card">
-        <img src="./assets/sponsors/unisco.png" alt="اليونسكو" class="partner-logo">
+        <img src="./assets/home/bilo.png" alt="اليونسكو" class="partner-logo">
         <h3 class="partner-name">اليونسكو</h3>
         <p class="partner-role" data-ar="الشريك الدولي" data-en="International Partner">الشريك الدولي</p>
       </div>
