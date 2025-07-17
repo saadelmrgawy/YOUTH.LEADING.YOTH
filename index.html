@@ -29,7 +29,7 @@
     body {
       margin: 0;
       font-family: 'Cairo', sans-serif;
-      background: url('./assets/home/bg-space.jpg.png') no-repeat center center fixed;
+      background: url('./assets/home/bg-space.png') no-repeat center center fixed;
       background-size: cover;
       color: var(--text-color);
       overflow-x: hidden;
@@ -46,7 +46,7 @@
       background: linear-gradient(135deg, rgba(0, 20, 100, 0.7) 0%, rgba(0, 40, 80, 0.8) 100%);
     }
     
-    /* شريط التنقل - تحسينات للريسبونسيف */
+   /* شريط التنقل - تحسينات للريسبونسيف */
     .nav-bar {
       display: flex;
       justify-content: space-between;
@@ -229,31 +229,6 @@
       transform: translateY(-2px);
     }
 
-    /* تعديلات للهاتف */
-    @media (max-width: 768px) {
-      .search-bar {
-        top: 60px;
-        right: 5%;
-        width: 90%;
-        left: auto;
-      }
-      
-      .search-icon {
-        padding: 8px 10px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .search-bar {
-        padding: 12px;
-      }
-      
-      .search-bar input {
-        padding: 10px 12px;
-        font-size: 0.9em;
-      }
-    }
-    
     /* لغة ذهبية */
     .language-toggle {
       font-size: clamp(1em, 1.1vw, 1.2em);
@@ -335,18 +310,18 @@
     }
     
     /* محتوى ثابت فوق السلايدر */
-    .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      width: 90%;
-      max-width: 800px;
-      z-index: 10;
-      margin-top: 71px;
-      padding: 20px;
-    }
+ .hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+  z-index: 10;
+  margin-top: 71px;
+  padding: 20px;
+}
     
     .hero-title {
       font-size: 2.2rem;
@@ -455,6 +430,19 @@
         min-width: 180px;
       }
     }
+    @media (max-width: 767px) {
+  .hero-content {
+    top: 45%;
+    transform: translate(-50%, -50%);
+      }
+    }
+
+    @media (max-width: 480px) {
+  .hero-content {
+    top: 40%;
+    margin-top: 40px;
+  }
+}
     
     .social-icons {
       display: flex;
@@ -1429,7 +1417,7 @@
       background: var(--golden-hover);
     }
     
-    /* الفوتر - تعديلات لجعل كل العناصر تبدأ من اليمين */
+      /* الفوتر - تعديلات لجعل كل العناصر تبدأ من اليمين */
     .footer {
       background: rgba(0, 0, 0, 0.5);
       padding: 40px 5% 20px;
@@ -1439,7 +1427,7 @@
     
     .footer-content {
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 4 أعمدة متساوية */
+      grid-template-columns: repeat(4, 1fr);
       gap: 30px;
       max-width: 1200px;
       margin: 0 auto;
@@ -1543,38 +1531,47 @@
       padding-right: 5px;
     }
     
-    /* قسم البحث في الفوتر */
+    /* قسم البحث في الفوتر - تحسينات جديدة */
     .footer-search {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-top: 20px;
+      margin-top: 25px;
+      width: 100%;
     }
     
     .footer-search-input {
       display: flex;
       width: 100%;
       max-width: 300px;
+      position: relative;
+      transition: all 0.3s;
     }
     
     .footer-search input {
-      padding: 10px 15px;
+      padding: 12px 15px;
       border-radius: var(--border-radius) 0 0 var(--border-radius);
       border: none;
       background: rgba(255,255,255,0.15);
       color: white;
       width: 100%;
       transition: all 0.3s;
+      font-family: 'Cairo', sans-serif;
     }
     
     .footer-search input:focus {
       outline: none;
       background: rgba(255,255,255,0.25);
       box-shadow: 0 0 10px rgba(43, 104, 255, 0.5);
+      border-color: var(--primary-color);
+    }
+    
+    .footer-search input::placeholder {
+      color: rgba(255,255,255,0.6);
     }
     
     .footer-search-btn {
-      padding: 10px 15px;
+      padding: 12px;
       background: var(--primary-color);
       color: white;
       border: none;
@@ -1584,6 +1581,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      overflow: hidden;
+      width: 45px;
+      height: 45px;
     }
     
     .footer-search-btn:hover {
@@ -1612,16 +1613,33 @@
       height: 1px;
       background: rgba(255,255,255,0.1);
       margin: 30px 0;
-      grid-column: 1 / -1; /* يمتد عبر جميع الأعمدة */
+      grid-column: 1 / -1;
     }
     
     .footer-copyright {
       text-align: center;
       font-size: 0.9em;
       opacity: 0.7;
-      grid-column: 1 / -1; /* يمتد عبر جميع الأعمدة */
+      grid-column: 1 / -1;
     }
     
+    @keyframes biloFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes biloFloatHover {
+      0%, 100% {
+        transform: translateY(0) scale(1.1);
+      }
+      50% {
+        transform: translateY(-15px) scale(1.1);
+      }
+    }
     /* تأثيرات الجزيئات */
     .particles {
       position: fixed;
@@ -1799,76 +1817,6 @@
       left: 20px;
     }
 
-    @media (max-width: 992px) {
-      .bilo-character {
-        width: 110px;
-      }
-      
-      .bilo-tooltip {
-        width: 250px;
-        font-size: 0.8em;
-        padding: 12px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .bilo-character {
-        width: 100px;
-        bottom: 20px;
-      }
-      
-      .bilo-tooltip {
-        width: 200px;
-        max-width: calc(100vw - 30px);
-      }
-      
-      .bilo-tooltip::after {
-        right: 20px;
-      }
-      
-      [lang="en"] .bilo-tooltip::after {
-        left: 20px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .bilo-character {
-        width: 80px;
-        bottom: 15px;
-      }
-      
-      .bilo-tooltip {
-        width: 180px;
-        padding: 10px;
-        font-size: 0.75em;
-      }
-      
-      .bilo-tooltip::after {
-        right: 10px;
-      }
-      
-      [lang="en"] .bilo-tooltip::after {
-        left: 10px;
-      }
-    }
-
-    @keyframes biloFloat {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
-    }
-
-    @keyframes biloFloatHover {
-      0%, 100% {
-        transform: translateY(0) scale(1.1);
-      }
-      50% {
-        transform: translateY(-15px) scale(1.1);
-      }
-    }
     
     /* تحسينات للهواتف المحمولة */
     @media (max-width: 768px) {
@@ -2219,18 +2167,18 @@
   </div>
   
   <div class="nav-links" id="nav-links">
-    <a href="home.html" class="nav-link active" data-ar="الصفحة الرئيسية" data-en="Home"><i data-feather="home"></i> الصفحة الرئيسية</a>
-    <a href="news.html" class="nav-link" data-ar="الأخبار" data-en="News"><i data-feather="file-text"></i> الأخبار</a>
-    <a href="events.html" class="nav-link" data-ar="الفعاليات" data-en="Events"><i data-feather="calendar"></i> الفعاليات</a>
-    <a href="sponsors.html" class="nav-link" data-ar="الداعمون " data-en="Sponsors"><i data-feather="users"></i> الداعمون </a>
-    <a href="about.html" class="nav-link" data-ar="معلومات عنا" data-en="About"><i data-feather="info"></i> معلومات عنا</a>
-    <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"><i data-feather="mail"></i> اتصل بنا</a>
+    <a href="home.html" class="nav-link active" data-ar="الصفحة الرئيسية" data-en="Home"> الصفحة الرئيسية</a>
+    <a href="news.html" class="nav-link" data-ar="الأخبار" data-en="News"> الأخبار</a>
+    <a href="events.html" class="nav-link" data-ar="الفعاليات" data-en="Events"> الفعاليات</a>
+    <a href="sponsors.html" class="nav-link" data-ar="الداعمون " data-en="Sponsors"> الداعمون </a>
+    <a href="about.html" class="nav-link" data-ar="معلومات عنا" data-en="About">معلومات عنا</a>
+    <a href="contact.html" class="nav-link" data-ar="اتصل بنا" data-en="Contact"> اتصل بنا</a>
   </div>
   
   <div class="user-actions">
     <div class="language-toggle" onclick="toggleLanguage()">
       <i data-feather="globe"></i>
-      <span>العربية / English</span>
+      <span></span>
     </div>
     
     <div class="search-container">
@@ -3268,6 +3216,23 @@
     }
   });
 
+
+  // عند تحميل الصفحة، تحقق إذا لم يكن هناك لغة محددة مسبقًا
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!localStorage.getItem('preferredLanguage')) {
+      // إذا لم تكن هناك لغة محددة، قم بتعيين الإنجليزية
+      toggleLanguage();
+      localStorage.setItem('preferredLanguage', 'en');
+    }
+    
+    // باقي كود التهيئة...
+    createParticles();
+    setupSearch();
+    setupMobileMenu();
+    setupBiloCharacter();
+    feather.replace();
+    setupStatsAnimation();
+  });
 
 </script>
 </body>
